@@ -119,6 +119,7 @@ $(document).ready(function () {
     const bgColorSelected = "rgba(255, 255, 255, 1)";
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
+    const posExpanded = "fixed";
 
     element.dataset.isMoving = true;
     const duration = 250;
@@ -135,7 +136,7 @@ $(document).ready(function () {
             left: element.getBoundingClientRect().left + "px",
             top: element.getBoundingClientRect().top + "px",
             backgroundColor: initialBgColor,
-            position: "fixed",
+            position: posExpanded,
           },
           {
             width: "100vw",
@@ -144,6 +145,7 @@ $(document).ready(function () {
             top: "0px",
             zIndex: maxZ,
             backgroundColor: bgColorSelected,
+            position: posExpanded,
           },
         ],
         {
@@ -195,6 +197,7 @@ $(document).ready(function () {
         element.style.top = "0";
         element.style.zIndex = maxZ;
         element.style.backgroundColor = bgColorSelected;
+        element.style.position = posExpanded;
         element.dataset.isExpanded = true;
       } else {
         // ● 縮小時
