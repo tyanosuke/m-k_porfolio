@@ -11,59 +11,65 @@ $(document).ready(function () {
     }
 
     const parent = element.parentElement;
-    const parentStyle = window.getComputedStyle(parent);
     element.dataset.initialLeft = parent.getBoundingClientRect().left;
     element.dataset.initialTop = parent.getBoundingClientRect().top;
   }
 
   // ================================================================
 
+  // 初期表示処理
+  const containers = document.querySelectorAll(".container");
+  containers.forEach((element) => {
+    element.classList.add("hide");
+  });
+  const objects = document.querySelectorAll(".testObject");
+  objects.forEach((element) => {
+    element.style.transform = "scale(0)";
+  });
+
+  // ================================================================
+
   /**
    * タイトルの消去
    */
-  const element = document.querySelector(".titleCover");
-  element.addEventListener("click", () => {
-    const duration = 500;
-    const anime1 = element.animate(
-      [
-        {
-          clipPath: "inset(0 0 0 0)",
-        },
-        {
-          clipPath: "inset(0 0 0 100%)",
-        },
-      ],
-      {
-        duration: duration,
-        easing: "ease-out",
-        fill: "forwards",
-      }
-    );
-    anime1.onfinish = () => {
-      // タイトルを消去
-      element.remove();
+  const pageButtons = document.querySelectorAll(".pageButton");
+  pageButtons.forEach((element) => {
+    element.addEventListener("click", () => {
+      // 選択処理
+      pageButtons.forEach((element) => {
+        element.classList.remove("selected");
+      });
+      element.classList.add("selected");
 
-      // 表示アニメーション
-      const elements = document.querySelectorAll(".testObject");
-      elements.forEach((element) => {
-        const duration = 250;
-        const anime2 = element.animate(
-          [
-            {
-              transform: "scale(0, 0)",
-            },
-            {
-              transform: "scale(1, 1)",
-            },
-          ],
+      // アニメーション
+      const duration = 500;
+      const titleCover = document.querySelector(".titleCover");
+      const anime1 = titleCover.animate(
+        [
           {
-            duration: duration,
-            easing: "ease-out",
-            fill: "forwards",
-          }
-        );
+            clipPath: "inset(0 0 0 0)",
+          },
+          {
+            clipPath: "inset(0 0 0 100%)",
+          },
+        ],
+        {
+          duration: duration,
+          easing: "ease-out",
+          fill: "forwards",
+        }
+      );
+      anime1.onfinish = () => {
+        // タイトルを消去
+        titleCover.remove();
 
-        anime2.onfinish = () => {
+        // 要素を表示
+        const containers = document.querySelector(".container");
+        containers.classList.remove("hide");
+
+        // 表示アニメーション
+        const elements = document.querySelectorAll(".testObject");
+        elements.forEach((element) => {
           // フラグ
           element.dataset.isExpanded = false;
           element.dataset.isMoving = false;
@@ -71,18 +77,27 @@ $(document).ready(function () {
           // 要素のサイズ・座標を保持
           getElementData(element);
 
-          // 初期position属性
+          // クラス情報取得用
           const computedStyle = window.getComputedStyle(element);
+
+          // 初期position属性
           const position = computedStyle.getPropertyValue("position");
           element.dataset.initialPosition = position;
+
+          // 初期背景色
+          const bgColor = computedStyle.getPropertyValue("background-color");
+          element.dataset.initialBgColor = bgColor;
+
+          // アイテムを拡大表示
+          element.style = {};
 
           // イベント付加
           element.addEventListener("click", () => {
             toggleElementSize(element);
           });
-        };
-      });
-    };
+        });
+      };
+    });
   });
 
   // ================================================================
@@ -96,11 +111,12 @@ $(document).ready(function () {
     const initialLeft = element.dataset.initialLeft;
     const initialTop = element.dataset.initialTop;
     const initialPosition = element.dataset.initialPosition;
+    const initialBgColor = element.dataset.initialBgColor;
     const isExpanded = element.dataset.isExpanded === "true";
-    const maxZ = 99999;
+    const maxZ = 1000;
+    const bgColorSelected = "rgba(255, 255, 255, 1)";
 
     element.dataset.isMoving = true;
-
     const duration = 250;
     let animation;
     if (!isExpanded) {
@@ -112,6 +128,7 @@ $(document).ready(function () {
             height: initialHeight + "px",
             left: element.getBoundingClientRect().left + "px",
             top: element.getBoundingClientRect().top + "px",
+            backgroundColor: initialBgColor,
           },
           {
             width: "100vw",
@@ -119,6 +136,7 @@ $(document).ready(function () {
             left: "0px",
             top: "0px",
             zIndex: maxZ,
+            backgroundColor: bgColorSelected,
           },
         ],
         {
@@ -139,6 +157,7 @@ $(document).ready(function () {
             left: "0px",
             top: "0px",
             position: initialPosition,
+            backgroundColor: bgColorSelected,
           },
           {
             width: initialWidth + "px",
@@ -146,6 +165,7 @@ $(document).ready(function () {
             left: initialLeft + "px",
             top: initialTop + "px",
             position: initialPosition,
+            backgroundColor: initialBgColor,
           },
         ],
         {
@@ -167,6 +187,7 @@ $(document).ready(function () {
         element.style.left = "0";
         element.style.top = "0";
         element.style.zIndex = maxZ;
+        element.style.backgroundColor = bgColorSelected;
         element.dataset.isExpanded = true;
       } else {
         // ● 縮小時
