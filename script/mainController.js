@@ -5,11 +5,13 @@ $(document).ready(function () {
    * 要素のサイズ・座標を取得
    */
   function getElementData(element) {
+    // サイズを取得する
     if (element.dataset.isExpanded === "false") {
       element.dataset.initialWidth = element.offsetWidth;
       element.dataset.initialHeight = element.offsetHeight;
     }
 
+    // 親要素の座標を取得する
     const parent = element.parentElement;
     element.dataset.initialLeft = parent.getBoundingClientRect().left;
     element.dataset.initialTop = parent.getBoundingClientRect().top;
@@ -115,12 +117,16 @@ $(document).ready(function () {
     const isExpanded = element.dataset.isExpanded === "true";
     const maxZ = 1000;
     const bgColorSelected = "rgba(255, 255, 255, 1)";
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
 
     element.dataset.isMoving = true;
     const duration = 250;
     let animation;
     if (!isExpanded) {
       // ● 拡大時
+
+      // アニメーション
       animation = element.animate(
         [
           {
@@ -129,6 +135,7 @@ $(document).ready(function () {
             left: element.getBoundingClientRect().left + "px",
             top: element.getBoundingClientRect().top + "px",
             backgroundColor: initialBgColor,
+            position: "fixed",
           },
           {
             width: "100vw",
@@ -145,18 +152,18 @@ $(document).ready(function () {
           fill: "none",
         }
       );
-
-      element.style.position = "fixed";
     } else {
       // ● 縮小時
+
+      // アニメーション
       animation = element.animate(
         [
           {
             width: "100vw",
             height: "100vh",
-            left: "0px",
-            top: "0px",
-            position: initialPosition,
+            left: scrollX + "0px",
+            top: scrollY + "px",
+            zIndex: maxZ,
             backgroundColor: bgColorSelected,
           },
           {
@@ -164,7 +171,7 @@ $(document).ready(function () {
             height: initialHeight + "px",
             left: initialLeft + "px",
             top: initialTop + "px",
-            position: initialPosition,
+            zIndex: "0",
             backgroundColor: initialBgColor,
           },
         ],

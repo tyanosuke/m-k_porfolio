@@ -52,7 +52,8 @@ body {
 
 .typeButtonArea > .typeButton {
   height: 30px;
-  cursor: pointer;
+  /* cursor: pointer; */
+  cursor: not-allowed;
   transition: transform 0.25s;
 }
 
