@@ -12,6 +12,43 @@ body {
   background: #ccc;
 }
 
+.titleCover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(20, 20, 20);
+  position: fixed;
+
+  color: rgba(255, 255, 255);
+  cursor: pointer;
+}
+
+.titleCover .title {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.titleCover .needClick {
+  animation: needClick 1.5s both;
+  animation-iteration-count: infinite;
+}
+
+@keyframes needClick {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -43,17 +80,7 @@ body {
   background: rgba(0, 0, 0, 0.75);
   cursor: pointer;
 
-  animation: show 0.25s none;
-  transition: transform 0.25s;
-}
-
-@keyframes show {
-  0% {
-    transform: scale(0, 0);
-  }
-  100% {
-    transform: scale(1, 1);
-  }
+  transform: scale(0, 0);
 }
 
 .testObject[data-is-expanded="false"][data-is-moving="false"]:hover {
@@ -62,8 +89,8 @@ body {
 }
 
 .testObject > img {
-  width: 100%;
-  height: auto;
-  margin-top: auto;
+  width: auto;
+  height: 100%;
   max-width: 100vw;
+  object-fit: contain;
 }
