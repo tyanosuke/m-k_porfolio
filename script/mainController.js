@@ -1,6 +1,13 @@
 $(document).ready(function () {
   // ================================================================
 
+  // スクロール禁止
+  function noscroll(e) {
+    e.preventDefault();
+  }
+
+  // ================================================================
+
   /**
    * 要素のサイズ・座標を取得
    */
@@ -61,6 +68,8 @@ $(document).ready(function () {
           fill: "forwards",
         }
       );
+
+      // アニメーション終了後
       anime1.onfinish = () => {
         // タイトルを消去
         titleCover.remove();
@@ -81,10 +90,6 @@ $(document).ready(function () {
 
           // クラス情報取得用
           const computedStyle = window.getComputedStyle(element);
-
-          // 初期position属性
-          const position = computedStyle.getPropertyValue("position");
-          element.dataset.initialPosition = position;
 
           // 初期背景色
           const bgColor = computedStyle.getPropertyValue("background-color");
@@ -108,11 +113,14 @@ $(document).ready(function () {
    * 画像ズームイン・アウト
    */
   function toggleElementSize(element) {
-    const initialWidth = element.dataset.initialWidth;
-    const initialHeight = element.dataset.initialHeight;
-    const initialLeft = element.dataset.initialLeft;
-    const initialTop = element.dataset.initialTop;
-    const initialPosition = element.dataset.initialPosition;
+    // 座標の再取得
+    getElementData(element);
+
+    // 定数
+    const initialWidth = parseInt(element.dataset.initialWidth);
+    const initialHeight = parseInt(element.dataset.initialHeight);
+    const initialLeft = parseInt(element.dataset.initialLeft);
+    const initialTop = parseInt(element.dataset.initialTop);
     const initialBgColor = element.dataset.initialBgColor;
     const isExpanded = element.dataset.isExpanded === "true";
     const maxZ = 1000;
@@ -121,6 +129,7 @@ $(document).ready(function () {
     const scrollY = window.scrollY;
     const posExpanded = "fixed";
 
+    // ズームイン・アウト処理
     element.dataset.isMoving = true;
     const duration = 250;
     let animation;
@@ -163,7 +172,7 @@ $(document).ready(function () {
           {
             width: "100vw",
             height: "100vh",
-            left: scrollX + "0px",
+            left: scrollX + "px",
             top: scrollY + "px",
             zIndex: maxZ,
             backgroundColor: bgColorSelected,
@@ -171,8 +180,8 @@ $(document).ready(function () {
           {
             width: initialWidth + "px",
             height: initialHeight + "px",
-            left: initialLeft + "px",
-            top: initialTop + "px",
+            left: initialLeft + scrollX + "px",
+            top: initialTop + scrollY + "px",
             zIndex: "0",
             backgroundColor: initialBgColor,
           },
@@ -187,10 +196,12 @@ $(document).ready(function () {
       element.style = {};
     }
 
-    // アニメーション完了後の処理
+    // アニメーション終了後
     animation.onfinish = () => {
       if (element.dataset.isExpanded === "false") {
         // ● 拡大時
+
+        // スタイル・フラグ操作
         element.style.width = "100vw";
         element.style.height = "100vh";
         element.style.left = "0";
@@ -199,10 +210,20 @@ $(document).ready(function () {
         element.style.backgroundColor = bgColorSelected;
         element.style.position = posExpanded;
         element.dataset.isExpanded = true;
+
+        // スクロール禁止：ＯＮ
+        document.addEventListener("touchmove", noscroll, { passive: false });
+        document.addEventListener("wheel", noscroll, { passive: false });
       } else {
         // ● 縮小時
+
+        // スタイル・フラグ操作
         element.style = {};
         element.dataset.isExpanded = false;
+
+        // スクロール禁止：ＯＦＦ
+        document.removeEventListener("touchmove", noscroll);
+        document.removeEventListener("wheel", noscroll);
       }
 
       element.dataset.isMoving = false;
