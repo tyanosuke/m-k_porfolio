@@ -31,10 +31,6 @@ $(document).ready(function () {
   containers.forEach((element) => {
     element.classList.add("hide");
   });
-  const objects = document.querySelectorAll(".testObject");
-  objects.forEach((element) => {
-    element.style.transform = "scale(0)";
-  });
 
   // ================================================================
 
@@ -49,6 +45,35 @@ $(document).ready(function () {
         element.classList.remove("selected");
       });
       element.classList.add("selected");
+
+      // ギャラリー作成
+      const folderPath = "./image/";
+      const selectedType = "colorAndShape";
+      fetch(folderPath + "colorAndShape/index.json")
+        .then((response) => response.json())
+        .then((data) => {
+          // 要素を追加する箇所を指定
+          const imageContainer = document.getElementById(selectedType);
+
+          // フォルダ内の画像データを読み込み
+          data.forEach((imageData) => {
+            const primary = document.createElement("div");
+            primary.classList.add("item");
+
+            const secondary = document.createElement("div");
+            secondary.classList.add("object");
+            secondary.style.transform = "scale(0)";
+
+            const image = document.createElement("img");
+            image.src = folderPath + selectedType + "/" + imageData.name;
+            image.alt = imageData.caption;
+
+            secondary.appendChild(image);
+            primary.appendChild(secondary);
+            imageContainer.appendChild(primary);
+          });
+        })
+        .catch((error) => console.error(error));
 
       // アニメーション
       const duration = 500;
@@ -79,7 +104,7 @@ $(document).ready(function () {
         containers.classList.remove("hide");
 
         // 表示アニメーション
-        const elements = document.querySelectorAll(".testObject");
+        const elements = document.querySelectorAll(".object");
         elements.forEach((element) => {
           // フラグ
           element.dataset.isExpanded = false;
@@ -210,6 +235,7 @@ $(document).ready(function () {
         element.style.backgroundColor = bgColorSelected;
         element.style.position = posExpanded;
         element.dataset.isExpanded = true;
+        document.querySelector(".caption").classList.remove("hide");
 
         // スクロール禁止：ＯＮ
         document.addEventListener("touchmove", noscroll, { passive: false });
@@ -220,6 +246,7 @@ $(document).ready(function () {
         // スタイル・フラグ操作
         element.style = {};
         element.dataset.isExpanded = false;
+        document.querySelector(".caption").classList.add("hide");
 
         // スクロール禁止：ＯＦＦ
         document.removeEventListener("touchmove", noscroll);
@@ -236,7 +263,7 @@ $(document).ready(function () {
    * リサイズ時に各要素の座標を再取得
    */
   function resizeElements() {
-    const elements = document.querySelectorAll(".testObject");
+    const elements = document.querySelectorAll(".object");
     elements.forEach((element) => {
       // 要素のサイズ・座標の再取得
       getElementData(element);

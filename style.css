@@ -3,11 +3,11 @@
 :root {
   /* 通常画面サイズ */
   --item-size: 200px;
-  --item-margin: 20px;
+  --item-margin: 10px;
 
   /* 小さい画面サイズ */
   --item-size-mini: 100px;
-  --item-margin-mini: 10px;
+  --item-margin-mini: 5px;
 }
 
 body {
@@ -46,8 +46,14 @@ body {
   flex-direction: row;
   position: fixed;
   top: 20px;
-  right: 50px;
+  right: 30px;
   z-index: 2000;
+}
+
+@media screen and (max-width: 600px) {
+  .typeButtonArea {
+    right: 10px;
+  }
 }
 
 .typeButtonArea > .typeButton {
@@ -77,10 +83,16 @@ body {
   flex-direction: column;
   position: fixed;
   top: 150px;
-  right: 50px;
+  right: 30px;
   z-index: 2000;
   color: #00f;
   border-bottom: solid 1px transparent;
+}
+
+@media screen and (max-width: 600px) {
+  .pageButtonArea {
+    right: 10px;
+  }
 }
 
 .pageButtonArea > .pageButton {
@@ -113,14 +125,34 @@ body {
 
 .container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 100px 150px;
+  margin: 60px 100px 10px 10px;
 }
 
-.hide {
+@media screen and (max-width: 600px) {
+  .container {
+    margin: 60px 80px 10px 10px;
+  }
+}
+
+.container.hide {
   display: none;
+}
+
+.caption {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+
+  color: #b65695;
+
+  transition: opacity 0.25s;
+}
+
+.caption.hide {
+  opacity: 0;
 }
 
 .item {
@@ -129,7 +161,7 @@ body {
   margin: var(--item-margin);
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .item {
     width: var(--item-size-mini);
     height: var(--item-size-mini);
@@ -137,7 +169,7 @@ body {
   }
 }
 
-.testObject {
+.object {
   display: flex;
   justify-content: center;
   box-sizing: border-box;
@@ -152,11 +184,11 @@ body {
   transition: transform 0.25s;
 }
 
-.testObject[data-is-expanded="false"][data-is-moving="false"]:hover {
+.object[data-is-expanded="false"][data-is-moving="false"]:hover {
   transform: scale(1.1);
 }
 
-.testObject > img {
+.object > img {
   width: 100%;
   height: auto;
   max-width: 100vw;
