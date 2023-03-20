@@ -203,7 +203,7 @@ body.colorAndShape {
   width: var(--arrow-size);
   height: var(--arrow-size);
   margin-right: 5px;
-  background-image: url("/image/gui/arrow.png");
+  background-image: url("./image/gui/arrow.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -214,7 +214,7 @@ body.colorAndShape {
   width: var(--arrow-size);
   height: var(--arrow-size);
   margin-left: 5px;
-  background-image: url("/image/gui/arrow.png");
+  background-image: url("./image/gui/arrow.png");
   background-size: contain;
   background-repeat: no-repeat;
   transform: rotate(180deg);
