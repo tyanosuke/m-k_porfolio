@@ -10,7 +10,7 @@
   --item-margin-mini: 5px;
 
   /* 矢印アイコンサイズ */
-  --arrow-size: 15px;
+  --arrow-size: 20px;
 
   /* 右ＵＩマージン */
   --right-ui-margin: 30px;
@@ -197,26 +197,22 @@ body.colorAndShape {
   transform: scale(1.1);
 }
 
-.prevButton::before {
-  content: "";
-  display: inline-block;
-  width: var(--arrow-size);
-  height: var(--arrow-size);
-  margin-right: 5px;
-  background-image: url("./image/gui/arrow.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
+.prevButton::before,
 .nextButton::after {
   content: "";
   display: inline-block;
   width: var(--arrow-size);
   height: var(--arrow-size);
-  margin-left: 5px;
   background-image: url("./image/gui/arrow.png");
   background-size: contain;
   background-repeat: no-repeat;
+}
+.prevButton::before {
+  margin-right: 5px;
+}
+
+.nextButton::after {
+  margin-left: 5px;
   transform: rotate(180deg);
 }
 
