@@ -1,42 +1,17 @@
 $(document).ready(function () {
   // ================================================================
 
-  // スクロール禁止
-  function noscroll(e) {
-    e.preventDefault();
-  }
-
-  // ================================================================
-
   /**
-   * 要素のサイズ・座標を取得
+   * 初期化
    */
-  function getElementData(element) {
-    // サイズを取得する
-    if (element.dataset.isExpanded === "false") {
-      element.dataset.initialWidth = element.offsetWidth;
-      element.dataset.initialHeight = element.offsetHeight;
-    }
 
-    // 親要素の座標を取得する
-    const parent = element.parentElement;
-    element.dataset.initialLeft = parent.getBoundingClientRect().left;
-    element.dataset.initialTop = parent.getBoundingClientRect().top;
-  }
-
-  // ================================================================
-
-  // 初期表示処理
+  // ギャラリー非表示
   const containers = document.querySelectorAll(".container");
   containers.forEach((element) => {
     element.classList.add("hide");
   });
 
-  // ================================================================
-
-  /**
-   * タイトルの消去
-   */
+  // タイトルの消去
   const pageButtons = document.querySelectorAll(".pageButton");
   pageButtons.forEach((element) => {
     element.addEventListener("click", () => {
@@ -61,7 +36,7 @@ $(document).ready(function () {
             primary.classList.add("item");
 
             const secondary = document.createElement("div");
-            secondary.classList.add("object");
+            secondary.classList.add("exhibit");
             secondary.style.transform = "scale(0)";
 
             const image = document.createElement("img");
@@ -104,7 +79,7 @@ $(document).ready(function () {
         containers.classList.remove("hide");
 
         // 表示アニメーション
-        const elements = document.querySelectorAll(".object");
+        const elements = document.querySelectorAll(".exhibit");
         elements.forEach((element) => {
           // フラグ
           element.dataset.isExpanded = false;
@@ -135,8 +110,104 @@ $(document).ready(function () {
   // ================================================================
 
   /**
-   * 画像ズームイン・アウト
+   * リサイズ時に各要素の座標を再取得
    */
+  function resizeElements() {
+    const elements = document.querySelectorAll(".exhibit");
+    elements.forEach((element) => {
+      // 要素のサイズ・座標の再取得
+      getElementData(element);
+    });
+  }
+  window.addEventListener("resize", resizeElements);
+
+  // ================================================================
+
+  /**
+   * ギャラリーオブジェクトの取得
+   */
+  function getGalleryObject(element = null) {
+    const crntElm = element
+      ? element
+      : document.querySelector(".exhibit[data-is-expanded=true]");
+    const prevElm = crntElm.parentElement.previousElementSibling;
+    const nextElm = crntElm.parentElement.nextElementSibling;
+
+    let result = [];
+    if (prevElm) {
+      result[0] = prevElm.querySelector(".exhibit");
+    }
+    result[1] = crntElm;
+    if (nextElm) {
+      result[2] = nextElm.querySelector(".exhibit");
+    }
+    return result;
+  }
+
+  // ================================================================
+
+  /**
+   * PREVボタン
+   */
+  const elementPrevButton = document.querySelector(".prevButton");
+  function pushPrevButton() {
+    // 前のアイテムが無い場合、処理を行わない
+    if (elementPrevButton.classList.contains("invalid")) {
+      return;
+    }
+
+    // クリックイベントを発火
+    const exhibitList = getGalleryObject();
+    exhibitList[1].click();
+    exhibitList[0].click();
+  }
+  elementPrevButton.addEventListener("click", pushPrevButton);
+
+  // ================================================================
+
+  /**
+   * NEXTボタン
+   */
+  const elementNextButton = document.querySelector(".nextButton");
+  function pushNextButton() {
+    // 次のアイテムが無い場合、処理を行わない
+    if (elementNextButton.classList.contains("invalid")) {
+      return;
+    }
+
+    // クリックイベントを発火
+    const exhibitList = getGalleryObject();
+    exhibitList[1].click();
+    exhibitList[2].click();
+  }
+  elementNextButton.addEventListener("click", pushNextButton);
+
+  // ================================================================
+
+  /**
+   * スクロール禁止
+   */
+  function noscroll(e) {
+    e.preventDefault();
+  }
+
+  /**
+   * 要素のサイズ・座標を取得
+   */
+  function getElementData(element) {
+    // サイズを取得する
+    if (element.dataset.isExpanded === "false") {
+      element.dataset.initialWidth = element.offsetWidth;
+      element.dataset.initialHeight = element.offsetHeight;
+    }
+
+    // 親要素の座標を取得する
+    const parent = element.parentElement;
+    element.dataset.initialLeft = parent.getBoundingClientRect().left;
+    element.dataset.initialTop = parent.getBoundingClientRect().top;
+  }
+
+  // 画像ズームイン・アウト
   function toggleElementSize(element) {
     // 座標の再取得
     getElementData(element);
@@ -153,6 +224,7 @@ $(document).ready(function () {
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
     const posExpanded = "fixed";
+    const captionElement = document.querySelector(".caption");
 
     // ズームイン・アウト処理
     element.dataset.isMoving = true;
@@ -160,6 +232,26 @@ $(document).ready(function () {
     let animation;
     if (!isExpanded) {
       // ● 拡大時
+
+      // キャプション・ボタン非表示
+      document.querySelector(".caption").classList.remove("hide");
+      captionElement.textContent = element.querySelector("img").alt;
+      document.querySelector(".galleryButtonArea").classList.remove("hide");
+
+      // PREV/NEXTボタン設定
+      const exhibits = getGalleryObject(element);
+      const prevClass = document.querySelector(".prevButton").classList;
+      const nextClass = document.querySelector(".nextButton").classList;
+      if (!exhibits[0]) {
+        prevClass.add("invalid");
+      } else {
+        prevClass.remove("invalid");
+      }
+      if (!exhibits[2]) {
+        nextClass.add("invalid");
+      } else {
+        nextClass.remove("invalid");
+      }
 
       // アニメーション
       animation = element.animate(
@@ -190,6 +282,10 @@ $(document).ready(function () {
       );
     } else {
       // ● 縮小時
+
+      // キャプション・ボタン非表示
+      document.querySelector(".caption").classList.add("hide");
+      document.querySelector(".galleryButtonArea").classList.add("hide");
 
       // アニメーション
       animation = element.animate(
@@ -235,7 +331,6 @@ $(document).ready(function () {
         element.style.backgroundColor = bgColorSelected;
         element.style.position = posExpanded;
         element.dataset.isExpanded = true;
-        document.querySelector(".caption").classList.remove("hide");
 
         // スクロール禁止：ＯＮ
         document.addEventListener("touchmove", noscroll, { passive: false });
@@ -246,7 +341,6 @@ $(document).ready(function () {
         // スタイル・フラグ操作
         element.style = {};
         element.dataset.isExpanded = false;
-        document.querySelector(".caption").classList.add("hide");
 
         // スクロール禁止：ＯＦＦ
         document.removeEventListener("touchmove", noscroll);
@@ -256,20 +350,6 @@ $(document).ready(function () {
       element.dataset.isMoving = false;
     };
   }
-
-  // ================================================================
-
-  /**
-   * リサイズ時に各要素の座標を再取得
-   */
-  function resizeElements() {
-    const elements = document.querySelectorAll(".object");
-    elements.forEach((element) => {
-      // 要素のサイズ・座標の再取得
-      getElementData(element);
-    });
-  }
-  window.addEventListener("resize", resizeElements);
 
   // ================================================================
 });

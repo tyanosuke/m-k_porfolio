@@ -8,12 +8,22 @@
   /* 小さい画面サイズ */
   --item-size-mini: 100px;
   --item-margin-mini: 5px;
+
+  /* 矢印アイコンサイズ */
+  --arrow-size: 15px;
+
+  /* 右ＵＩマージン */
+  --right-ui-margin: 30px;
 }
 
 body {
   margin: 0;
   background-color: #fff;
   transition: background-color 0.5s;
+}
+
+body.colorAndShape {
+  background-color: #fff;
 }
 
 /* ------------------------------------------------------------- */
@@ -46,7 +56,7 @@ body {
   flex-direction: row;
   position: fixed;
   top: 20px;
-  right: 30px;
+  right: var(--right-ui-margin);
   z-index: 2000;
 }
 
@@ -83,7 +93,7 @@ body {
   flex-direction: column;
   position: fixed;
   top: 150px;
-  right: 30px;
+  right: var(--right-ui-margin);
   z-index: 2000;
   color: #00f;
   border-bottom: solid 1px transparent;
@@ -151,7 +161,67 @@ body {
   transition: opacity 0.25s;
 }
 
-.caption.hide {
+.galleryButtonArea {
+  display: flex;
+  position: fixed;
+  bottom: 50px;
+  right: var(--right-ui-margin);
+  z-index: 2000;
+
+  transition: opacity 0.25s;
+}
+
+@media screen and (max-width: 600px) {
+  .galleryButtonArea {
+    right: 10px;
+  }
+}
+
+.galleryButtonArea > .button {
+  display: flex;
+  align-items: center;
+  transition: transform 0.25s, opacity 0.25s;
+  cursor: pointer;
+}
+
+.galleryButtonArea > .button.invalid {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.galleryButtonArea > .button:not(:first-child) {
+  margin-left: 20px;
+}
+
+.galleryButtonArea > .button:not(.invalid):hover {
+  transform: scale(1.1);
+}
+
+.prevButton::before {
+  content: "";
+  display: inline-block;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  margin-right: 5px;
+  background-image: url("/image/gui/arrow.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.nextButton::after {
+  content: "";
+  display: inline-block;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  margin-left: 5px;
+  background-image: url("/image/gui/arrow.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(180deg);
+}
+
+.caption.hide,
+.galleryButtonArea.hide {
   opacity: 0;
 }
 
@@ -169,7 +239,7 @@ body {
   }
 }
 
-.object {
+.exhibit {
   display: flex;
   justify-content: center;
   box-sizing: border-box;
@@ -184,11 +254,11 @@ body {
   transition: transform 0.25s;
 }
 
-.object[data-is-expanded="false"][data-is-moving="false"]:hover {
+.exhibit[data-is-expanded="false"][data-is-moving="false"]:hover {
   transform: scale(1.1);
 }
 
-.object > img {
+.exhibit > img {
   width: 100%;
   height: auto;
   max-width: 100vw;
