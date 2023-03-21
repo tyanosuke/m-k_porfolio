@@ -26,7 +26,9 @@
 }
 
 .image {
-  display: contents;
+  display: flex;
+  height: 200px;
+  justify-content: center;
 }
 
 img {
@@ -36,6 +38,6 @@ img {
   transition: transform 0.25s;
 }
 
-.categoryButton:not([data-pushed="true"]):hover > img {
+.categoryButton:not([data-pushed="true"]):hover img {
   transform: scale(1.1);
 }

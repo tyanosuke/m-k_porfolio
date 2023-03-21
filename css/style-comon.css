@@ -6,27 +6,25 @@
 
 :root {
   /* 通常画面サイズ */
-  --item-size: 200px;
+  --item-size: 100px;
   --item-margin: 10px;
 
   /* 小さい画面サイズ */
-  --item-size-mini: 100px;
-  --item-margin-mini: 5px;
+  --item-size-mini: 50px;
+  --item-margin-mini: 20px;
 
   /* 矢印アイコンサイズ */
-  --arrow-size: 20px;
+  --arrow-size: 18px;
 
   /* 右ＵＩマージン */
   --right-ui-margin: 30px;
+  --right-ui-margin-mini: 20px;
 }
 
 /* ------------------------------------------------------------- */
 
 body {
-  width: 100vw;
-  height: 100vh;
   margin: 0;
-  box-sizing: border-box;
   background-color: #fff;
 }
 
@@ -46,18 +44,29 @@ body {
 
 /* ------------------------------------------------------------- */
 
+/* カテゴリーボタン */
+
 .categoryButtonArea {
   display: flex;
-  flex-direction: row;
   position: fixed;
   top: 20px;
   right: var(--right-ui-margin);
   z-index: 3000;
+  animation: startCategory 0.25s ease;
+}
+
+@keyframes startCategory {
+  from {
+    transform: translateY(-100px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @media screen and (max-width: 600px) {
   .categoryButtonArea {
-    right: 10px;
+    right: var(--right-ui-margin-mini);
   }
 }
 
@@ -82,6 +91,8 @@ body {
 
 /* ------------------------------------------------------------- */
 
+/* ページボタン */
+
 .pageButtonArea {
   display: flex;
   flex-direction: column;
@@ -91,11 +102,21 @@ body {
   z-index: 3000;
   color: #00f;
   border-bottom: solid 1px transparent;
+  animation: startPage 0.25s ease;
+}
+
+@keyframes startPage {
+  from {
+    transform: translateX(150px);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @media screen and (max-width: 600px) {
   .pageButtonArea {
-    right: 10px;
+    right: var(--right-ui-margin-mini);
   }
 }
 
@@ -191,7 +212,7 @@ body {
 
 @media screen and (max-width: 600px) {
   .galleryButtonArea {
-    right: 10px;
+    right: var(--right-ui-margin-mini);
   }
 }
 
@@ -221,7 +242,7 @@ body {
   display: inline-block;
   width: var(--arrow-size);
   height: var(--arrow-size);
-  background-image: url("/image/gui/arrow.png");
+  background-image: url("../image/gui/arrow.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
