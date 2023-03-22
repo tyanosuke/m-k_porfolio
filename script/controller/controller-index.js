@@ -64,7 +64,7 @@ $(document).ready(function () {
           delay: 250,
           duration: 500,
           easing: "ease-in",
-          fill: "forwards",
+          fill: "none",
         }
       );
       anime.onfinish = () => {
