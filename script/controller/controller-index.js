@@ -5,6 +5,12 @@ $(document).ready(function () {
    * 初期化
    */
 
+  // 初期化
+  const unselected = document.querySelectorAll(".categoryButton");
+  unselected.forEach((element) => {
+    element.style = {};
+  });
+
   // ギャラリー非表示
   const containers = document.querySelectorAll(".categoryButton");
   containers.forEach((element) => {
@@ -21,9 +27,6 @@ $(document).ready(function () {
       const category = element.getAttribute("data-link");
 
       // アニメーション
-      const unselected = document.querySelectorAll(
-        ".categoryButton:not(#" + id + ")"
-      );
       unselected.forEach((element) => {
         element.animate(
           [
