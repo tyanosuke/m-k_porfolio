@@ -1,8 +1,3 @@
-$(window).on("unload", function () {
-  $("body").hide();
-  $("body").show();
-});
-
 $(document).ready(function () {
   // ================================================================
 
