@@ -1,3 +1,4 @@
+// ブラウザバック時処理（スマホ対応）
 window.onpageshow = function (event) {
   if (event.persisted) {
     window.location.reload();
@@ -70,7 +71,7 @@ $(document).ready(function () {
           delay: 250,
           duration: 500,
           easing: "ease-in",
-          fill: "none",
+          fill: "forwards",
         }
       );
       anime.onfinish = () => {
