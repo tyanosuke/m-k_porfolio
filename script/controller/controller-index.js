@@ -5,11 +5,11 @@ $(document).ready(function () {
    * 初期化
    */
 
-  // 初期化
-  const unselected = document.querySelectorAll(".categoryButton");
-  unselected.forEach((element) => {
-    element.style = {};
-  });
+  // // 初期化
+  // const unselected = document.querySelectorAll(".categoryButton");
+  // unselected.forEach((element) => {
+  //   element.style = {};
+  // });
 
   // ギャラリー非表示
   const containers = document.querySelectorAll(".categoryButton");
@@ -40,7 +40,7 @@ $(document).ready(function () {
           {
             duration: 250,
             easing: "ease-out",
-            fill: "forwards",
+            fill: "none",
           }
         );
       });
@@ -57,7 +57,7 @@ $(document).ready(function () {
           delay: 250,
           duration: 500,
           easing: "ease-in",
-          fill: "forwards",
+          fill: "none",
         }
       );
 
