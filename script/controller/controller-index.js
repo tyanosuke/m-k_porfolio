@@ -5,11 +5,11 @@ $(document).ready(function () {
    * 初期化
    */
 
-  // // 初期化
-  // const unselected = document.querySelectorAll(".categoryButton");
-  // unselected.forEach((element) => {
-  //   element.style = {};
-  // });
+  // 初期化
+  const buttons = document.querySelectorAll(".categoryButton");
+  buttons.forEach((element) => {
+    element.style = {};
+  });
 
   // ギャラリー非表示
   const containers = document.querySelectorAll(".categoryButton");
@@ -27,6 +27,11 @@ $(document).ready(function () {
       const category = element.getAttribute("data-link");
 
       // アニメーション
+
+      // 押されてないほう
+      const unselected = document.querySelectorAll(
+        ".categoryButton:not(#" + id + ")"
+      );
       unselected.forEach((element) => {
         element.animate(
           [
@@ -40,10 +45,12 @@ $(document).ready(function () {
           {
             duration: 250,
             easing: "ease-out",
-            fill: "none",
+            fill: "forwards",
           }
         );
       });
+
+      // 押されたほう
       const anime = element.animate(
         [
           {
@@ -57,11 +64,9 @@ $(document).ready(function () {
           delay: 250,
           duration: 500,
           easing: "ease-in",
-          fill: "none",
+          fill: "forwards",
         }
       );
-
-      // アニメーション終了後
       anime.onfinish = () => {
         // リンク遷移
         open(category, "_self");
