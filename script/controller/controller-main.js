@@ -26,7 +26,7 @@ $(document).ready(function () {
         secondary.dataset.isMoving = false;
 
         const image = document.createElement("img");
-        image.src = folderPath + "/" + imageData.name;
+        image.setAttribute("data-src", folderPath + "/" + imageData.name);
         image.alt = imageData.caption;
 
         secondary.appendChild(image);
@@ -40,20 +40,35 @@ $(document).ready(function () {
 
     // 処理終了後
     .finally(() => {
-      // 表示アニメーション
-      const elements = document.querySelectorAll(".exhibit");
-      elements.forEach((element) => {
-        // 要素のサイズ・座標を保持
-        getElementData(element);
+      const img_elements = document.querySelectorAll(".item img");
+      for (let i = 0; i < img_elements.length; i++) {
+        // 遅延読み込み
+        img_elements[i].src = img_elements[i].getAttribute("data-src");
+        img_elements[i].removeAttribute("data-src");
 
-        // アイテムを拡大表示
-        element.style = {};
+        // 画像読み込み完了したときの処理
+        img_elements[i].addEventListener("load", () => {
+          // 最後の１つの場合
+          if (img_elements.length - 1 === i) {
+            // 表示アニメーション
+            const elements = document.querySelectorAll(".exhibit");
+            elements.forEach((element) => {
+              // 要素のサイズ・座標を保持
+              getElementData(element);
+              // アイテムを拡大表示
+              element.style = {};
+              // イベント付加
+              element.addEventListener("click", () => {
+                toggleElementSize(element);
+              });
+            });
 
-        // イベント付加
-        element.addEventListener("click", () => {
-          toggleElementSize(element);
+            // スピナー非表示
+            const spinner = document.querySelector(".spinner");
+            spinner.classList.add("hide");
+          }
         });
-      });
+      }
     });
 
   // ================================================================

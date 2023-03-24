@@ -299,3 +299,39 @@ body {
   padding: 10%;
   object-fit: contain;
 }
+
+/* ------------------------------------------------------------- */
+/* スピナー */
+
+.spinner {
+  --size: 40px;
+  --rotate: 10deg;
+
+  width: var(--size);
+  height: var(--size);
+  position: fixed;
+  top: calc(50% - var(--size) / 2);
+  left: calc(50% - var(--size) / 2);
+  background: #00f;
+
+  animation: rotate 1s linear infinite;
+}
+
+.spinner.hide {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(var(--rotate)) scale(0.75, 1);
+  }
+  50% {
+    transform: rotate(var(--rotate)) scale(0, 1);
+  }
+  100% {
+    transform: rotate(var(--rotate)) scale(0.75, 1);
+  }
+}
+
+/* ------------------------------------------------------------- */
