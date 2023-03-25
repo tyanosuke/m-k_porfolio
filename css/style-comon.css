@@ -304,17 +304,35 @@ body {
 /* スピナー */
 
 .spinner {
-  --size: 40px;
-  --rotate: 10deg;
+  --size: 100px;
 
   width: var(--size);
   height: var(--size);
+  box-sizing: border-box;
   position: fixed;
   top: calc(50% - var(--size) / 2);
   left: calc(50% - var(--size) / 2);
-  background: #00f;
+  z-index: 5000;
+  border: solid 20px #888;
+  border-radius: 100%;
 
-  animation: rotate 1s linear infinite;
+  animation: rotate 1.5s linear infinite;
+}
+
+.spinner::before {
+  --size: 20px;
+
+  content: "";
+  width: var(--size);
+  height: var(--size);
+  box-sizing: border-box;
+  position: absolute;
+  top: calc(50% - var(--size) / 2);
+  left: calc(50% + 50px - var(--size));
+  z-index: 5000;
+
+  background: #fff;
+  border-radius: 100%;
 }
 
 .spinner.hide {
@@ -324,13 +342,10 @@ body {
 
 @keyframes rotate {
   0% {
-    transform: rotate(var(--rotate)) scale(0.75, 1);
-  }
-  50% {
-    transform: rotate(var(--rotate)) scale(0, 1);
+    transform: rotate(0deg);
   }
   100% {
-    transform: rotate(var(--rotate)) scale(0.75, 1);
+    transform: rotate(360deg);
   }
 }
 
