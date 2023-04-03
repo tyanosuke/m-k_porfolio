@@ -8,7 +8,17 @@
   justify-content: center;
 }
 
-img {
+img#caption {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  max-width: 100vw;
+  height: 30px;
+  object-fit: contain;
+}
+
+img#displayItem {
   width: 50vw;
   max-width: 500px;
   height: auto;
