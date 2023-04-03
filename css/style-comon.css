@@ -2,27 +2,6 @@
 
 /* ------------------------------------------------------------- */
 
-/* 定数 */
-
-:root {
-  /* 通常画面サイズ */
-  --item-size: 100px;
-  --item-margin: 10px;
-
-  /* 小さい画面サイズ */
-  --item-size-mini: 50px;
-  --item-margin-mini: 20px;
-
-  /* 矢印アイコンサイズ */
-  --arrow-size: 18px;
-
-  /* 右ＵＩマージン */
-  --right-ui-margin: 30px;
-  --right-ui-margin-mini: 20px;
-}
-
-/* ------------------------------------------------------------- */
-
 body {
   margin: 0;
   background-color: #fff;
@@ -30,7 +9,7 @@ body {
 
 /* ------------------------------------------------------------- */
 
-/* 選択禁止 */
+/* 範囲選択禁止 */
 
 * {
   user-select: none;
@@ -55,21 +34,6 @@ body {
   animation: startCategory 0.25s ease;
 }
 
-@keyframes startCategory {
-  from {
-    transform: translateY(-100px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .categoryButtonArea {
-    right: var(--right-ui-margin-mini);
-  }
-}
-
 .categoryButtonArea > .categoryButton {
   height: 30px;
   cursor: pointer;
@@ -91,262 +55,24 @@ body {
 
 /* ------------------------------------------------------------- */
 
-/* ページボタン */
-
-.pageButtonArea {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 150px;
-  right: var(--right-ui-margin);
-  z-index: 3000;
-  color: #00f;
-  border-bottom: solid 1px transparent;
-  animation: startPage 0.25s ease;
-}
-
-@keyframes startPage {
-  from {
-    transform: translateX(150px);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .pageButtonArea {
-    right: var(--right-ui-margin-mini);
-  }
-}
-
-.pageButtonArea > .pageButton {
-  cursor: pointer;
-  transition: color 0.25s;
-  margin-bottom: 5px;
-}
-
-.pageButtonArea > .pageButton:hover {
-  color: #aaf;
-}
-
-.pageButton::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  background-color: #00f;
-  transform: scaleX(0);
-  transform-origin: 0 0;
-  transition: transform 0.3s ease-in-out;
-}
-
-.selected::after {
-  transform: scaleX(1);
-  top: 100%;
-}
-
-/* ------------------------------------------------------------- */
-
-/* 拡大時の背景 */
-
-.galleryBackground {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  background-color: #fff;
-  opacity: 1;
-
-  transition: opacity 0.25s, z-index 0.25s;
-}
-
-.galleryBackground.hide {
-  z-index: 0;
-  opacity: 0;
-}
-
-/* ------------------------------------------------------------- */
-
 /* ギャラリーエリア */
 
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 60px 100px 10px 10px;
-}
-
-@media screen and (max-width: 600px) {
-  .container {
-    margin: 60px 80px 10px 10px;
-  }
-}
-
-.container.hide {
-  display: none;
-}
-
-.caption {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 3000;
-
-  color: #b65695;
-
-  transition: opacity 0.25s;
-}
-
-.galleryButtonArea {
-  display: flex;
-  position: fixed;
-  bottom: 50px;
-  right: var(--right-ui-margin);
-  z-index: 3000;
-
-  transition: opacity 0.25s;
-}
-
-@media screen and (max-width: 600px) {
-  .galleryButtonArea {
-    right: var(--right-ui-margin-mini);
-  }
-}
-
-.galleryButtonArea > .button {
-  display: flex;
-  align-items: center;
-  transition: transform 0.25s, opacity 0.25s;
-  cursor: pointer;
-}
-
-.galleryButtonArea > .button.invalid {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.galleryButtonArea > .button:not(:first-child) {
-  margin-left: 20px;
-}
-
-.galleryButtonArea > .button:not(.invalid):hover {
-  transform: scale(1.1);
-}
-
-.prevButton::before,
-.nextButton::after {
-  content: "";
-  display: inline-block;
-  width: var(--arrow-size);
-  height: var(--arrow-size);
-  background-image: url("../image/gui/arrow.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.prevButton::before {
-  margin-right: 5px;
-}
-
-.nextButton::after {
-  margin-left: 5px;
-  transform: rotate(180deg);
-}
-
-.caption.hide,
-.galleryButtonArea.hide {
-  opacity: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .item {
-  width: var(--item-size);
-  height: var(--item-size);
-  margin: var(--item-margin);
+  position: fixed;
 }
 
-@media screen and (max-width: 600px) {
-  .item {
-    width: var(--item-size-mini);
-    height: var(--item-size-mini);
-    margin: var(--item-margin-mini);
-  }
-}
-
-.exhibit {
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-  width: inherit;
-  height: inherit;
-  max-width: 100vw;
-  max-height: 100vh;
-  position: absolute;
-  cursor: pointer;
-
-  transition: transform 0.25s;
-}
-
-.exhibit[data-is-expanded="false"][data-is-moving="false"]:hover {
-  transform: scale(1.1);
-}
-
-.exhibit > img {
+img {
   width: 100%;
   height: auto;
-  max-width: 100vw;
-  padding: 10%;
-  object-fit: contain;
 }
 
-/* ------------------------------------------------------------- */
-/* スピナー */
-
-.spinner {
-  --size: 100px;
-
-  width: var(--size);
-  height: var(--size);
-  box-sizing: border-box;
-  position: fixed;
-  top: calc(50% - var(--size) / 2);
-  left: calc(50% - var(--size) / 2);
-  z-index: 5000;
-  border: solid 20px #888;
-  border-radius: 100%;
-
-  animation: rotate 1.5s linear infinite;
-}
-
-.spinner::before {
-  --size: 20px;
-
-  content: "";
-  width: var(--size);
-  height: var(--size);
-  box-sizing: border-box;
-  position: absolute;
-  top: calc(50% - var(--size) / 2);
-  left: calc(50% + 50px - var(--size));
-  z-index: 5000;
-
-  background: #fff;
-  border-radius: 100%;
-}
-
-.spinner.hide {
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.clickable {
+  cursor: pointer;
 }
 
 /* ------------------------------------------------------------- */

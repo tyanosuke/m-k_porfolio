@@ -1,98 +1,62 @@
 [
   {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
+    "name": "art_001.png",
+    "color": "FFF8E6"
   },
   {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
+    "name": "art_002.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
+    "name": "art_003.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
+    "name": "art_004.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
+    "name": "art_005.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
+    "name": "art_006.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
+    "name": "art_007.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
+    "name": "art_008.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
+    "name": "art_009.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
+    "name": "art_010.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
+    "name": "art_011.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
+    "name": "art_012.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
+    "name": "art_013.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
+    "name": "art_014.png",
+    "color": "FFFFFF"
   },
   {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
-  },
-  {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
-  },
-  {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
-  },
-  {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
-  },
-  {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
-  },
-  {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
-  },
-  {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
-  },
-  {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
-  },
-  {
-    "name": "230319art_mysite-08.png",
-    "caption": "This is image 1."
-  },
-  {
-    "name": "230319art_mysite-09.png",
-    "caption": "This is image 2."
+    "name": "art_015.png",
+    "color": "FFFFFF"
   }
 ]
