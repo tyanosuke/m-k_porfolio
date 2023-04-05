@@ -70,15 +70,18 @@ $(document).ready(function () {
   // ==================================================
 
   // 初期設定
-  const elements = document.querySelectorAll(".item");
-  elements.forEach((element) => {
-    moveElement(element);
-  });
+  const durationFirst = 5;
+  setTimeout(() => {
+    const elements = document.querySelectorAll(".item");
+    elements.forEach((element) => {
+      moveElement(element);
+    });
+  }, durationFirst);
 
   // 動き設定
   function moveElement(element) {
     // 移動間隔をランダムに決定する
-    const interval = Math.floor(Math.random() * 3000);
+    const interval = Math.floor(Math.random() * 3000) + durationFirst;
 
     // 次の移動をスケジュールする
     setTimeout(() => {
