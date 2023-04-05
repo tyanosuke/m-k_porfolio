@@ -76,10 +76,12 @@ $(document).ready(function () {
   // ================================================================
 });
 
+const maxDuration = 5000;
+
 // 動き設定
 function moveElement(element) {
   // 移動間隔をランダムに決定する
-  const interval = Math.floor(Math.random() * 3000) + 1000;
+  const interval = Math.floor(Math.random() * maxDuration);
 
   // 次の移動をスケジュールする
   setTimeout(() => {
@@ -111,6 +113,10 @@ function setMove(element) {
   element.style.transform = "rotate(" + angle + "deg)";
 
   // トランジション
-  const duration = 3;
-  element.style.transition = "all " + duration + "s";
+  const rect = element.getBoundingClientRect();
+  const dist =
+    Math.abs(randomLeft - rect.left) + Math.abs(randomTop - rect.top);
+  const speed = 50;
+  const time = Math.min(dist / speed, maxDuration / 1000);
+  element.style.transition = "all " + time + "s";
 }
