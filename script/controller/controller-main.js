@@ -5,7 +5,8 @@ window.onpageshow = function (event) {
   }
 };
 
-const numImagesToShow = 15; // 表示する画像の数
+// 表示する画像の数
+const numImagesToShow = 15;
 
 $(document).ready(function () {
   /**
@@ -35,13 +36,13 @@ $(document).ready(function () {
       randomFilenames.forEach((data) => {
         const item = document.createElement("div");
         item.classList.add("item");
-        setMove(item);
         const image = document.createElement("img");
         image.classList.add("clickable");
         image.setAttribute("data-src", folderPath + "/" + data.name);
         image.setAttribute("data-cap", folderPath + "/" + data.name + "_c");
         image.setAttribute("data-col", data.color);
         item.appendChild(image);
+        setMove(item);
         moveElement(item);
         imageContainer.appendChild(item);
       });
@@ -73,11 +74,12 @@ $(document).ready(function () {
         });
       }
     });
-
-  // ================================================================
 });
+// ================================================================
 
 const maxDuration = 5000;
+const moveSpeed = 100;
+const moveMax = (maxDuration / 1000) * moveSpeed;
 
 // 動き設定
 function moveElement(element) {
@@ -117,9 +119,9 @@ function setMove(element) {
   element.style.transform = "rotate(" + angle + "deg)";
 
   // トランジション
-  const dist =
-    Math.abs(randomLeft - rect.left) + Math.abs(randomTop - rect.top);
-  const speed = 50;
-  const time = Math.min(dist / speed, maxDuration / 1000);
+  const dist = Math.sqrt(
+    Math.pow(randomLeft - rect.left, 2) + Math.pow(randomTop - rect.top, 2)
+  );
+  const time = Math.max(dist / moveSpeed, 1);
   element.style.transition = "all " + time + "s";
 }
