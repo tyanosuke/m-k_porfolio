@@ -27,27 +27,12 @@ $(document).ready(function () {
       randomFilenames.forEach((data) => {
         const item = document.createElement("div");
         item.classList.add("item");
-
-        // ランダム配置
-        let x = Math.floor(Math.random() * 100);
-        x -= 10;
-        x += Math.floor(Math.random() * 20);
-        let y = Math.floor(Math.random() * 100);
-        y -= 10;
-        y += Math.floor(Math.random() * 20);
-        const angle = Math.floor(Math.random() * 360);
-        const scale = Math.random() * 1.5 + 0.25;
-        item.style.left = x + "%";
-        item.style.top = y + "%";
-        item.style.width = "calc(20% * " + scale + ")";
-        item.style.transform = "rotate(" + angle + "deg)";
-
+        setMove(item);
         const image = document.createElement("img");
         image.classList.add("clickable");
         image.setAttribute("data-src", folderPath + "/" + data.name);
         image.setAttribute("data-cap", folderPath + "/" + data.name + "_c");
         image.setAttribute("data-col", data.color);
-
         item.appendChild(image);
         imageContainer.appendChild(item);
       });
@@ -79,6 +64,52 @@ $(document).ready(function () {
         });
       }
     });
+
+  //　うごめき設定
+  // 最初の移動をスケジュールする
+  setTimeout(() => {
+    const elements = document.querySelectorAll(".item");
+    elements.forEach((element) => {
+      moveElement(element);
+    });
+  }, 1000);
+
+  function moveElement(element) {
+    // 移動間隔をランダムに決定する
+    const interval = Math.floor(Math.random() * 5000) + 1000;
+
+    // 次の移動をスケジュールする
+    setTimeout(() => {
+      setMove(element);
+      moveElement(element);
+    }, interval);
+  }
+
+  function setMove(element) {
+    // Ｘ座標
+    const randomLeft = Math.floor(Math.random() * window.innerWidth);
+    element.style.left = randomLeft + "px";
+
+    // Ｙ座標
+    const randomTop = Math.floor(Math.random() * window.innerHeight);
+    element.style.top = randomTop + "px";
+
+    // Z座標
+    const randomPriority = Math.floor(Math.random() * 10);
+    element.style.zIndex = randomPriority;
+
+    // 大きさ
+    const scale = Math.random() * 1.5 + 0.25;
+    element.style.width = "calc(20% * " + scale + ")";
+
+    // 角度
+    const angle = Math.floor(Math.random() * 360);
+    element.style.transform = "rotate(" + angle + "deg)";
+
+    // トランジション
+    const duration = Math.random() * 5 + 1;
+    element.style.transition = "all " + duration + "s";
+  }
 
   // ================================================================
 });
