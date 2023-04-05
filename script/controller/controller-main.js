@@ -1,3 +1,10 @@
+// ブラウザバック時処理（スマホ対応）
+window.onpageshow = function (event) {
+  if (event.persisted) {
+    window.location.reload();
+  }
+};
+
 $(document).ready(function () {
   /**
    * 初期化
@@ -34,6 +41,7 @@ $(document).ready(function () {
         image.setAttribute("data-cap", folderPath + "/" + data.name + "_c");
         image.setAttribute("data-col", data.color);
         item.appendChild(image);
+        moveElement(item);
         imageContainer.appendChild(item);
       });
     })
@@ -65,57 +73,44 @@ $(document).ready(function () {
       }
     });
 
-  // ==================================================
-  //　うごめき設定
-  // ==================================================
-
-  // 初期設定
-  const durationFirst = 5;
-  setTimeout(() => {
-    const elements = document.querySelectorAll(".item");
-    elements.forEach((element) => {
-      moveElement(element);
-    });
-  }, durationFirst);
-
-  // 動き設定
-  function moveElement(element) {
-    // 移動間隔をランダムに決定する
-    const interval = Math.floor(Math.random() * 3000) + durationFirst;
-
-    // 次の移動をスケジュールする
-    setTimeout(() => {
-      setMove(element);
-      moveElement(element);
-    }, interval);
-  }
-
-  // 設定
-  function setMove(element) {
-    // Ｘ座標
-    const randomLeft = Math.floor(Math.random() * window.innerWidth);
-    element.style.left = randomLeft + "px";
-
-    // Ｙ座標
-    const randomTop = Math.floor(Math.random() * window.innerHeight);
-    element.style.top = randomTop + "px";
-
-    // Z座標
-    const randomPriority = Math.floor(Math.random() * 10);
-    element.style.zIndex = randomPriority;
-
-    // 大きさ
-    const scale = Math.random() * 1.5 + 0.25;
-    element.style.width = "calc(20% * " + scale + ")";
-
-    // 角度
-    const angle = Math.floor(Math.random() * 360);
-    element.style.transform = "rotate(" + angle + "deg)";
-
-    // トランジション
-    const duration = 3;
-    element.style.transition = "all " + duration + "s";
-  }
-
   // ================================================================
 });
+
+// 動き設定
+function moveElement(element) {
+  // 移動間隔をランダムに決定する
+  const interval = Math.floor(Math.random() * 3000) + 1000;
+
+  // 次の移動をスケジュールする
+  setTimeout(() => {
+    setMove(element);
+    moveElement(element);
+  }, interval);
+}
+
+// 設定
+function setMove(element) {
+  // Ｘ座標
+  const randomLeft = Math.floor(Math.random() * window.innerWidth);
+  element.style.left = randomLeft + "px";
+
+  // Ｙ座標
+  const randomTop = Math.floor(Math.random() * window.innerHeight);
+  element.style.top = randomTop + "px";
+
+  // Z座標
+  const randomPriority = Math.floor(Math.random() * 10);
+  element.style.zIndex = randomPriority;
+
+  // 大きさ
+  const scale = Math.random() * 1.5 + 0.25;
+  element.style.width = "calc(20% * " + scale + ")";
+
+  // 角度
+  const angle = Math.floor(Math.random() * 360);
+  element.style.transform = "rotate(" + angle + "deg)";
+
+  // トランジション
+  const duration = 3;
+  element.style.transition = "all " + duration + "s";
+}
