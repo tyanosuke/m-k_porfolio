@@ -65,18 +65,20 @@ $(document).ready(function () {
       }
     });
 
+  // ==================================================
   //　うごめき設定
-  // 最初の移動をスケジュールする
-  setTimeout(() => {
-    const elements = document.querySelectorAll(".item");
-    elements.forEach((element) => {
-      moveElement(element);
-    });
-  }, 1000);
+  // ==================================================
 
+  // 初期設定
+  const elements = document.querySelectorAll(".item");
+  elements.forEach((element) => {
+    moveElement(element);
+  });
+
+  // 動き設定
   function moveElement(element) {
     // 移動間隔をランダムに決定する
-    const interval = Math.floor(Math.random() * 5000) + 1000;
+    const interval = Math.floor(Math.random() * 3000);
 
     // 次の移動をスケジュールする
     setTimeout(() => {
@@ -85,6 +87,7 @@ $(document).ready(function () {
     }, interval);
   }
 
+  // 設定
   function setMove(element) {
     // Ｘ座標
     const randomLeft = Math.floor(Math.random() * window.innerWidth);
@@ -107,7 +110,7 @@ $(document).ready(function () {
     element.style.transform = "rotate(" + angle + "deg)";
 
     // トランジション
-    const duration = Math.random() * 5 + 1;
+    const duration = 3;
     element.style.transition = "all " + duration + "s";
   }
 
