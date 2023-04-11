@@ -99,8 +99,6 @@ function moveElement(element, pre = false) {
   // Ｙ座標
   let randomTop = Math.random() * window.innerHeight;
 
-  // 大きさ
-
   // 角度
   let angle = getRotationAngle(element);
   angle += Math.floor(Math.random() * 90);
