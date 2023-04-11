@@ -60,13 +60,10 @@ body {
 .container {
   width: 100vw;
   height: 100vh;
-}
-
-.item {
   position: relative;
 }
 
-.item > img {
+img.item {
   width: 100%;
   height: auto;
   position: absolute;

@@ -35,22 +35,16 @@ $(document).ready(function () {
       // 4. 抜き出したファイル名を使用して、画像を表示する。
       randomFilenames.forEach((data) => {
         // 要素作成
-        const item = document.createElement("div");
-        item.classList.add("item");
         const image = document.createElement("img");
+        image.classList.add("item");
         image.classList.add("clickable");
         image.setAttribute("data-src", folderPath + "/" + data.name);
         image.setAttribute("data-cap", folderPath + "/" + data.name + "_c");
         image.setAttribute("data-col", data.color);
-        item.appendChild(image);
-        imageContainer.appendChild(item);
+        imageContainer.appendChild(image);
 
         // ランダム移動
-        moveElement(item);
-        // 次の移動をスケジュールする
-        item.addEventListener("transitionend", () => {
-          moveElement(item);
-        });
+        moveElement(image, true);
       });
     })
 
@@ -59,7 +53,7 @@ $(document).ready(function () {
 
     // 処理終了
     .finally(() => {
-      const img_elements = document.querySelectorAll(".item img");
+      const img_elements = document.querySelectorAll("img.item");
       for (let i = 0; i < img_elements.length; i++) {
         const item = img_elements[i];
         // 遅延読み込み
@@ -68,6 +62,12 @@ $(document).ready(function () {
 
         // 画像読み込み完了したときの処理
         item.addEventListener("load", () => {
+          // 次の移動をスケジュールする
+          moveElement(item);
+          item.addEventListener("transitionend", () => {
+            moveElement(item);
+          });
+
           // イベント付加
           item.addEventListener("click", () => {
             // セッションストレージに表示画像データをセット
@@ -83,54 +83,67 @@ $(document).ready(function () {
 });
 // ================================================================
 
-const maxDuration = 5000;
-const moveSpeed = 300;
-const moveMax = (maxDuration / 1000) * moveSpeed;
+// 移動速度
+const moveSpeed = 150;
 
-// 動き設定
-function moveElement(element) {
-  // ランダム移動
-  setMove(element);
-}
-
-// 設定
-function setMove(element) {
+/**
+ * ランダム移動設定
+ */
+function moveElement(element, pre = false) {
   // 現在座標を取得
-  const rect = element.getBoundingClientRect();
-  const screen = document.querySelector(".container").getBoundingClientRect();
-  const screenWidth = screen.width;
-  const screenHeight = screen.height;
-
-  let max;
-  let min;
+  const { left: startX, top: startY } = element.getBoundingClientRect();
 
   // Ｘ座標
-  max = screenWidth;
-  min = 10;
-  const randomLeft = Math.floor(Math.random() * (max - min) + min);
-  element.style.left = randomLeft + "px";
+  let randomLeft = Math.random() * window.innerWidth;
 
   // Ｙ座標
-  max = screenHeight;
-  min = 10;
-  const randomTop = Math.floor(Math.random() * (max - min) + min);
-  element.style.top = randomTop + "px";
+  let randomTop = Math.random() * window.innerHeight;
 
   // 大きさ
-  if (!element.style.width) {
-    max = 2.0;
-    min = 0.25;
-    const scale = Math.random() * (max - min) + min;
-    element.style.width = "calc(20vw * " + scale + ")";
-  }
 
   // 角度
-  const angle = Math.floor(Math.random() * 360);
-  element.style.transform = "rotate(" + angle + "deg)";
+  let angle = getRotationAngle(element);
+  angle += Math.floor(Math.random() * 90);
+  angle -= Math.floor(Math.random() * 90);
 
-  // トランジション
-  const dist =
-    Math.abs(randomLeft - rect.left) + Math.abs(randomTop - rect.top);
-  const time = dist / moveSpeed;
-  element.style.transition = "all " + time + "s linear";
+  if (pre) {
+    // 大きさ
+    const max = 2.0;
+    const min = 0.25;
+    const scale = Math.random() * (max - min) + min;
+    element.style.width = "calc(20vw * " + scale + ")";
+  } else {
+    // トランジション
+    const dist = Math.sqrt(
+      Math.pow(startX - randomLeft, 2) + Math.pow(startY - randomTop, 2)
+    );
+    const time = dist / moveSpeed;
+    element.style.transition = "all " + time + "s linear";
+  }
+
+  // 移動の反映
+  element.style.left = randomLeft + "px";
+  element.style.top = randomTop + "px";
+  element.style.transform = "rotate(" + angle + "deg)";
+}
+
+/**
+ * 要素の角度を取得
+ */
+function getRotationAngle(element) {
+  const style = window.getComputedStyle(element, null);
+  const transform = style.getPropertyValue("transform");
+  const matrix = transform.match(/^matrix\((.+)\)$/);
+
+  if (matrix) {
+    const values = matrix[1].split(",");
+    const a = parseFloat(values[0]);
+    const b = parseFloat(values[1]);
+    const angleRad = Math.atan2(b, a);
+    const angleDeg = angleRad * (180 / Math.PI);
+
+    return angleDeg;
+  }
+
+  return 0;
 }
