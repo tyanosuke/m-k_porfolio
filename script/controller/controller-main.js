@@ -122,7 +122,7 @@ function moveElement(element, pre = false) {
   // 移動の反映
   element.style.left = randomLeft + "px";
   element.style.top = randomTop + "px";
-  element.style.transform = "rotate(" + angle + "deg)";
+  element.style.transform = "rotate(" + angle + "deg) translate(-50%, -50%)";
 }
 
 /**
