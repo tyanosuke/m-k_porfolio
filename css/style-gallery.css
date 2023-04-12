@@ -19,7 +19,7 @@ img#caption {
 }
 
 img#displayItem {
-  width: 50vw;
+  width: 40vw;
   max-width: 500px;
   height: auto;
   object-fit: contain;

@@ -44,12 +44,12 @@ body {
   height: 100%;
 }
 
-.categoryButtonArea > .categoryButton:hover {
+/* .categoryButtonArea > .categoryButton:hover {
   transform: scale(1.1);
-}
+} */
 
 .categoryButtonArea > .separator {
-  border-left: solid 2px #999;
+  border-left: solid 1px #999;
   margin: 0 15px;
 }
 

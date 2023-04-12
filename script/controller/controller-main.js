@@ -106,10 +106,10 @@ function moveElement(element, pre = false) {
 
   if (pre) {
     // 大きさ
-    const max = 2.0;
+    const max = 1.0;
     const min = 0.25;
     const scale = Math.random() * (max - min) + min;
-    element.style.width = "calc(20vw * " + scale + ")";
+    element.style.width = "calc(35vw * " + scale + ")";
   } else {
     // トランジション
     const dist = Math.sqrt(
@@ -122,7 +122,7 @@ function moveElement(element, pre = false) {
   // 移動の反映
   element.style.left = randomLeft + "px";
   element.style.top = randomTop + "px";
-  element.style.transform = "rotate(" + angle + "deg) translate(-50%, -50%)";
+  element.style.transform = "translate(-50%, -50%) rotate(" + angle + "deg)";
 }
 
 /**
