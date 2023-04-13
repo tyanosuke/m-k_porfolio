@@ -1,0 +1,116 @@
+@charset "utf-8";
+
+body {
+  background-color: #babcb7;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+}
+
+/* メニューリスト */
+
+.menuList {
+  background-color: #f19236;
+
+  width: 270px;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  padding-top: 20px;
+}
+
+.menuList .item {
+  width: auto;
+  height: 30px;
+
+  padding: 15px 30px;
+}
+
+.menuList .item img {
+  width: auto;
+  height: 100%;
+
+  cursor: pointer;
+}
+
+.menuList .item.disabled img {
+  opacity: 0.25;
+  cursor: initial;
+}
+
+/* メインエリア */
+
+.mainArea {
+  flex: 1;
+}
+
+.mainArea > .images {
+  padding-top: 10vh;
+  padding-left: 270px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.mainArea .images img {
+  width: auto;
+  max-width: 80%;
+  height: 80vh;
+  object-fit: contain;
+
+  margin-bottom: 10vh;
+}
+
+/* キャプション */
+
+.caption {
+  width: 250px;
+  height: auto;
+  object-fit: contain;
+
+  position: fixed;
+  top: 30px;
+  left: 300px;
+}
+
+.caption > img {
+  width: 100%;
+}
+
+/* ページ名 */
+
+.pageName {
+  width: auto;
+  height: 30px;
+  object-fit: contain;
+
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+
+.pageName > img {
+  height: 100%;
+}
+
+/* 作者名 */
+
+.name {
+  width: 350px;
+  height: auto;
+  object-fit: contain;
+
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.name > img {
+  width: 100%;
+}

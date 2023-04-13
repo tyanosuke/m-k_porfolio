@@ -3,30 +3,50 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>M&K Portfolio - Home</title>
-    <link rel="stylesheet" href="css/style-index.css" />
+    <title>Masakazu Suzuki - Home</title>
+    <link rel="stylesheet" href="css/style-index.css" type="text/css" />
     <script src="script/jquery-3.6.4.min.js"></script>
     <script src="script/controller/controller-index.js"></script>
   </head>
 
   <body>
-    <div class="titleArea">
-      <!-- 色と形 -->
-      <div
-        id="colorAndShape"
-        class="categoryButton"
-        data-link="page-colorAndShape.html"
-      >
-        <div class="image">
-          <img src="image/title/230319art_mysite-06.png" />
+    <div class="container">
+      <!-- メニュー -->
+      <div class="menuList">
+        <div class="item colorChange" id="menu_WORKS">
+          <img src="image/string/black/menu_WORKS.png" />
+        </div>
+        <a href="./gallery/index.html">
+          <div class="item colorChange" id="menu_ART">
+            <img src="image/string/black/menu_ART.png" />
+          </div>
+        </a>
+        <div class="item colorChange disabled" id="menu_ABOUT">
+          <img src="image/string/black/menu_ABOUT.png" />
+        </div>
+        <div class="item colorChange disabled" id="menu_INSTAGRAM">
+          <img src="image/string/black/menu_INSTAGRAM.png" />
         </div>
       </div>
 
-      <!-- 線 -->
-      <div id="line" class="categoryButton" data-link="page-line.html">
-        <div class="image">
-          <img src="image/title/230319art_mysite-07.png" />
-        </div>
+      <!-- メインエリア　 -->
+      <div class="mainArea">
+        <div class="images"></div>
+      </div>
+
+      <!-- キャプション -->
+      <div class="caption">
+        <img src="image/index/caption_white.png" />
+      </div>
+
+      <!-- ページ名 -->
+      <div class="pageName colorChange">
+        <img src="image/string/black/menu_WORKS.png" />
+      </div>
+
+      <!-- 作者名 -->
+      <div class="name colorChange">
+        <img src="image/string/black/MASAKAZUSUZUKI.png" />
       </div>
     </div>
   </body>

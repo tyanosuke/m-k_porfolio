@@ -6,80 +6,52 @@ window.onpageshow = function (event) {
 };
 
 $(document).ready(function () {
-  // ================================================================
-
-  /**
-   * 初期化
-   */
-
-  // 初期化
-  const buttons = document.querySelectorAll(".categoryButton");
-  buttons.forEach((element) => {
-    element.style = {};
-  });
-
-  // ギャラリー非表示
-  const containers = document.querySelectorAll(".categoryButton");
-  containers.forEach((element) => {
-    element.addEventListener("click", () => {
-      if (element.dataset.pushed === "true") {
-        return;
+  const menuItems = document.querySelectorAll(".menuList > .item");
+  menuItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const imagePrefix = "./image/art/";
+      let images = [];
+      let color;
+      let string = "image/string/";
+      switch (item.getAttribute("id")) {
+        case "menu_WORKS":
+          images.push(imagePrefix + "Work_kaeru_1-32.png");
+          images.push(imagePrefix + "Work_kaeru_1-33.png");
+          color = "#e7fe7c";
+          string += "green";
+          break;
+        default:
+          return;
+        // case "menu_ART":
+        //   images.push(imagePrefix + "Work_001-31.png");
+        //   color = "#f19236";
+        //   string += "black";
+        //   break;
       }
-      element.dataset.pushed = "true";
 
-      // カテゴリーを取得
-      const id = element.getAttribute("id");
+      // 画像の変更
+      const exhibit = document.querySelector(".mainArea .images");
+      while (exhibit.firstChild) {
+        exhibit.removeChild(exhibit.firstChild);
+      }
+      images.forEach((image) => {
+        const exhibitItem = document.createElement("img");
+        exhibitItem.src = image;
 
-      // リンク先を取得
-      const category = element.getAttribute("data-link");
-
-      // アニメーション
-
-      // 押されてないほう
-      const unselected = document.querySelectorAll(
-        ".categoryButton:not(#" + id + ")"
-      );
-      unselected.forEach((element) => {
-        element.animate(
-          [
-            {
-              flex: "1",
-            },
-            {
-              flex: "0",
-            },
-          ],
-          {
-            duration: 250,
-            easing: "ease-out",
-            fill: "forwards",
-          }
-        );
+        exhibit.appendChild(exhibitItem);
       });
 
-      // 押されたほう
-      const anime = element.animate(
-        [
-          {
-            opacity: "1",
-          },
-          {
-            opacity: "0",
-          },
-        ],
-        {
-          delay: 250,
-          duration: 500,
-          easing: "ease-in",
-          fill: "forwards",
-        }
-      );
-      anime.onfinish = () => {
-        // リンク遷移
-        open(category, "_self");
-      };
+      // 文字のカラー変更
+      const colorChangeTargets = document.querySelectorAll(".colorChange img");
+      colorChangeTargets.forEach((target) => {
+        const slashIndex = target.src.lastIndexOf("/");
+        target.src = string + target.src.slice(slashIndex);
+      });
+
+      // メニューリストのカラー変更
+      const menu = document.querySelector(".menuList");
+      console.dir(menu);
+      menu.style.backgroundColor = color;
     });
   });
-
-  // ================================================================
 });

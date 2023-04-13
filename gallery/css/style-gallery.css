@@ -1,0 +1,32 @@
+@charset "utf-8";
+@import url(style-comon.css);
+
+body {
+  background: #000;
+}
+
+.exhibit {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+img#caption {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  max-width: 100vw;
+  height: 30px;
+  object-fit: contain;
+}
+
+img#displayItem {
+  width: auto;
+  max-width: 75vw;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+}
