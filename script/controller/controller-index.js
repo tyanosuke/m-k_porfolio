@@ -51,9 +51,9 @@ function setImages(mode, works = false) {
   let bigImageIndex = [];
   let links = [];
   let addClass;
-  let menuBarColor = "rgb(255, 140, 0)";
+  let menuBarColor = "rgb(255, 170, 0)";
   let backgroundColor = "rgb(185, 190, 185)";
-  let stringColor = "black";
+  let stringColor = "yellow";
   switch (mode) {
     // メニュー
     case "menu_WORKS":
@@ -61,41 +61,16 @@ function setImages(mode, works = false) {
         warksPrefix + "thumbnail_kaeru1.png",
         warksPrefix + "thumbnail_kaeru2.png",
       ]);
-      images.push(imagePrefix + "Work_color_shape_2.png");
-      images.push(imagePrefix + "Work_color_shape_3.png");
-      images.push(imagePrefix + "Work_color_shape_4.png");
-      images.push(imagePrefix + "Work_color_shape_5.png");
-      images.push(imagePrefix + "Work_color_shape_2.png");
-      images.push(imagePrefix + "Work_color_shape_3.png");
-      images.push(imagePrefix + "Work_color_shape_4.png");
-      images.push(imagePrefix + "Work_color_shape_5.png");
-      images.push(imagePrefix + "Work_color_shape_2.png");
-      images.push(imagePrefix + "Work_color_shape_3.png");
-      images.push(imagePrefix + "Work_color_shape_4.png");
-      images.push(imagePrefix + "Work_color_shape_5.png");
+      images.push(warksPrefix + "thumbnail_color_shape1.png");
+      images.push(warksPrefix + "thumbnail_artsite1.png");
+      images.push(warksPrefix + "thumbnail_2022newyearcard1.png");
+      images.push(warksPrefix + "thumbnail_2021christmascard1.png");
+      images.push(warksPrefix + "thumbnail_ugoqmainvisual1.png");
       links.push({
         url: "work_kaeru",
         target: "main",
       });
       addClass = "list";
-      menuBarColor = "rgb(255, 170, 0)";
-      stringColor = "yellow";
-      break;
-    case "menu_ART":
-      images.push(imagePrefix + "Work_color_shape_1.png");
-      images.push(imagePrefix + "Work_color_shape_2.png");
-      images.push(imagePrefix + "Work_color_shape_3.png");
-      images.push(imagePrefix + "Work_color_shape_4.png");
-      images.push(imagePrefix + "Work_color_shape_5.png");
-      images.push(imagePrefix + "Work_color_shape_1.png");
-      images.push(imagePrefix + "Work_color_shape_2.png");
-      images.push(imagePrefix + "Work_color_shape_3.png");
-      images.push(imagePrefix + "Work_color_shape_4.png");
-      images.push(imagePrefix + "Work_color_shape_5.png");
-      bigImageIndex = [0, 5];
-      addClass = "list";
-      menuBarColor = "rgb(255, 170, 0)";
-      stringColor = "yellow";
       break;
     case "menu_ABOUT":
       break;
@@ -111,6 +86,21 @@ function setImages(mode, works = false) {
       stringColor = ["purple", "orange"];
       break;
     // ギャラリー
+    case "work_lineAndShape":
+      images.push(imagePrefix + "Work_color_shape_2.png");
+      images.push(imagePrefix + "Work_color_shape_3.png");
+      images.push(imagePrefix + "Work_color_shape_4.png");
+      images.push(imagePrefix + "Work_color_shape_5.png");
+      images.push(imagePrefix + "Work_color_shape_2.png");
+      images.push(imagePrefix + "Work_color_shape_3.png");
+      images.push(imagePrefix + "Work_color_shape_4.png");
+      images.push(imagePrefix + "Work_color_shape_5.png");
+      images.push(imagePrefix + "Work_color_shape_2.png");
+      images.push(imagePrefix + "Work_color_shape_3.png");
+      images.push(imagePrefix + "Work_color_shape_4.png");
+      images.push(imagePrefix + "Work_color_shape_5.png");
+      addClass = "list";
+      break;
     case "work_kaeru":
       images.push(imagePrefix + "Work_kaeru_1-32.png");
       images.push(imagePrefix + "Work_kaeru_1-33.png");

@@ -18,6 +18,7 @@ body {
 .menuList {
   width: 270px;
   height: 100vh;
+  background-color: rgb(255, 170, 0);
 
   position: fixed;
   top: 0;
@@ -130,7 +131,7 @@ body {
 /* キャプション */
 
 .caption {
-  width: 250px;
+  width: 200px;
   height: auto;
   object-fit: contain;
 
