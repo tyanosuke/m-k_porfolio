@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 body {
-  background-color: #babcb7;
+  background-color: rgb(185, 190, 185);
   margin: 0;
 }
 
@@ -9,11 +9,13 @@ body {
   display: flex;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 /* メニューリスト */
 
 .menuList {
-  background-color: #f19236;
-
   width: 270px;
   height: 100vh;
 
@@ -22,21 +24,21 @@ body {
   left: 0;
   z-index: 1000;
 
-  padding-top: 20px;
+  padding-top: 35px;
 }
 
 .menuList .item {
   width: auto;
-  height: 30px;
+  height: 28px;
 
   padding: 15px 30px;
+
+  cursor: pointer;
 }
 
 .menuList .item img {
   width: auto;
   height: 100%;
-
-  cursor: pointer;
 }
 
 .menuList .item.disabled img {
@@ -51,20 +53,78 @@ body {
 }
 
 .mainArea > .images {
+  margin-left: 270px;
   padding-top: 10vh;
-  padding-left: 270px;
   display: flex;
   flex-flow: column;
   align-items: center;
 }
 
-.mainArea .images img {
+.mainArea > .images.list {
+  padding-top: calc(12vh);
+  padding-bottom: calc(12vh);
+  padding-right: 4vw;
+  padding-left: 15vw;
+
+  flex-flow: wrap;
+}
+
+.mainArea > .images.instagram {
+  height: 100vh;
+  justify-content: center;
+
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.mainArea > .images img {
   width: auto;
   max-width: 80%;
-  height: 80vh;
   object-fit: contain;
+}
 
+.mainArea > .images.single img {
   margin-bottom: 10vh;
+}
+
+.mainArea > .images.instagram img {
+  width: 37%;
+  max-height: 50vh;
+
+  animation: clickHere 1.75s infinite;
+}
+
+@keyframes clickHere {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.05, 1.05);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.mainArea > .images.list img {
+  max-width: calc(100% - 40px);
+}
+
+.mainArea > .images.list img.big {
+  margin-bottom: 150px;
+}
+
+.mainArea > .images.list img:not(:first-child).big {
+  margin-top: 150px;
+}
+
+.mainArea > .images.list img:not(.big) {
+  width: calc(50% - 10px * 4);
+  margin: 10px;
+}
+
+.mainArea > .images.single img {
+  height: 80vh;
 }
 
 /* キャプション */
@@ -75,7 +135,7 @@ body {
   object-fit: contain;
 
   position: fixed;
-  top: 30px;
+  top: calc(35px + 15px);
   left: 300px;
 }
 
@@ -87,7 +147,7 @@ body {
 
 .pageName {
   width: auto;
-  height: 30px;
+  height: 32px;
   object-fit: contain;
 
   position: fixed;
