@@ -1,5 +1,18 @@
 @charset "utf-8";
 
+:root {
+  --sp-menu-height: 50px;
+
+  --menu-button-width: 32px;
+  --menu-button-height: 30px;
+
+  --defaulr-string-colr: rgb(255, 220, 50);
+}
+
+* {
+  user-select: none;
+}
+
 body {
   background-color: rgb(185, 190, 185);
   margin: 0;
@@ -13,7 +26,9 @@ body {
   cursor: pointer;
 }
 
+/* -------------------------------------------------- */
 /* メニューリスト */
+/* -------------------------------------------------- */
 
 .menuList {
   width: 270px;
@@ -47,7 +62,91 @@ body {
   cursor: initial;
 }
 
+@media screen and (max-width: 700px) {
+  .menuList {
+    width: 100vw;
+    height: var(--sp-menu-height);
+
+    padding-top: 0;
+
+    transition: all 0.25s;
+  }
+
+  .menuList:not(.open) > * {
+    display: none;
+    opacity: 0;
+  }
+
+  .menuList.open {
+    height: 100vh;
+
+    padding-top: calc(var(--menu-button-height) + 30px);
+  }
+}
+
+/* ハンバーガーボタン（スマホ用） */
+
+button.hamburgerButton {
+  width: var(--menu-button-width);
+  height: var(--menu-button-height);
+
+  position: fixed;
+  top: 10px;
+  left: 15px;
+  z-index: 3000;
+
+  background: none;
+  border: none;
+
+  transition: all 0.25s;
+}
+
+button.hamburgerButton::after,
+button.hamburgerButton::before {
+  display: block;
+  background: var(--defaulr-string-colr);
+  width: 100%;
+  height: 1px;
+
+  position: absolute;
+  top: calc(50% - 1px);
+  content: "";
+
+  transition: all 0.25s;
+}
+
+button.hamburgerButton::before {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 0 var(--defaulr-string-colr);
+}
+
+button.hamburgerButton::after {
+  transform: translateY(8px);
+}
+
+button.hamburgerButton::after,
+button.hamburgerButton::before {
+  transition: transform 0.3s;
+}
+
+button.hamburgerButton.open::before {
+  transform: rotate(30deg);
+  box-shadow: 0 0 0 var(--defaulr-string-colr);
+}
+
+button.hamburgerButton.open::after {
+  transform: rotate(-30deg);
+}
+
+@media screen and (min-width: 700px) {
+  .hamburgerButton {
+    display: none;
+  }
+}
+
+/* -------------------------------------------------- */
 /* メインエリア */
+/* -------------------------------------------------- */
 
 .mainArea {
   flex: 1;
@@ -70,7 +169,7 @@ body {
   flex-flow: wrap;
 }
 
-.mainArea > .images.instagram {
+.mainArea > .images.link {
   height: 100vh;
   justify-content: center;
 
@@ -88,7 +187,7 @@ body {
   margin-bottom: 10vh;
 }
 
-.mainArea > .images.instagram img {
+.mainArea > .images.link img {
   width: 37%;
   max-height: 50vh;
 
@@ -124,11 +223,30 @@ body {
   margin: 10px;
 }
 
-.mainArea > .images.single img {
-  height: 80vh;
+@media screen and (max-width: 700px) {
+  .mainArea > .images {
+    margin-left: 0px;
+  }
+
+  .mainArea > .images.list {
+    justify-content: center;
+
+    padding-right: 5vw;
+    padding-left: 5vh;
+  }
+
+  .mainArea > .images img {
+    width: 100% !important;
+  }
+
+  .mainArea > .images.link img {
+    width: 60% !important;
+  }
 }
 
+/* -------------------------------------------------- */
 /* キャプション */
+/* -------------------------------------------------- */
 
 .caption {
   width: 200px;
@@ -144,7 +262,17 @@ body {
   width: 100%;
 }
 
+@media screen and (max-width: 700px) {
+  .caption {
+    width: 150px;
+    top: calc(var(--sp-menu-height) + 20px);
+    left: 20px;
+  }
+}
+
+/* -------------------------------------------------- */
 /* ページ名 */
+/* -------------------------------------------------- */
 
 .pageName {
   width: auto;
@@ -160,7 +288,18 @@ body {
   height: 100%;
 }
 
+@media screen and (max-width: 700px) {
+  .pageName {
+    height: 22px;
+
+    top: calc(var(--sp-menu-height));
+    right: 0px;
+  }
+}
+
+/* -------------------------------------------------- */
 /* 作者名 */
+/* -------------------------------------------------- */
 
 .name {
   width: 350px;
@@ -174,4 +313,12 @@ body {
 
 .name > img {
   width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+  .name {
+    width: 205px;
+    bottom: 10px;
+    right: 20px;
+  }
 }

@@ -8,6 +8,9 @@ window.onpageshow = function (event) {
 // 画像切り替え用
 let imageChangeCount = 0;
 
+// 切り替えタイミング（ms）
+const imageChangeDuration = 2000;
+
 /**
  * 初期化
  */
@@ -31,7 +34,14 @@ $(document).ready(function () {
   // 画像切り替え
   setInterval(() => {
     imageAnimation();
-  }, 2000);
+  }, imageChangeDuration);
+
+  // ハンバーガーボタン
+  const hamburgerButton = document.querySelector(".hamburgerButton");
+  hamburgerButton.addEventListener("click", () => {
+    // 開閉
+    pushHamburgerButton();
+  });
 });
 
 /**
@@ -41,8 +51,11 @@ function setImages(mode, works = false) {
   // トップへスクロール
   window.scroll(0, 0);
 
+  // メニューを閉じる
+  pushHamburgerButton(2);
+
   // 画像表示用クラス
-  const exhibitClassList = ["list", "single", "instagram"];
+  const exhibitClassList = ["list", "single", "link"];
 
   // 表示内容の判定
   const imagePrefix = "./image/art/";
@@ -54,18 +67,34 @@ function setImages(mode, works = false) {
   let menuBarColor = "rgb(255, 170, 0)";
   let backgroundColor = "rgb(185, 190, 185)";
   let stringColor = "yellow";
+  let menuButtonColer = "rgb(255, 250, 50)";
   switch (mode) {
     // メニュー
     case "menu_WORKS":
       images.push([
+        warksPrefix + "thumbnail_kaeru2.png",
         warksPrefix + "thumbnail_kaeru1.png",
+      ]);
+      images.push([
+        warksPrefix + "thumbnail_color_shape1.png",
         warksPrefix + "thumbnail_kaeru2.png",
       ]);
-      images.push(warksPrefix + "thumbnail_color_shape1.png");
-      images.push(warksPrefix + "thumbnail_artsite1.png");
-      images.push(warksPrefix + "thumbnail_2022newyearcard1.png");
-      images.push(warksPrefix + "thumbnail_2021christmascard1.png");
-      images.push(warksPrefix + "thumbnail_ugoqmainvisual1.png");
+      images.push([
+        warksPrefix + "thumbnail_artsite1.png",
+        warksPrefix + "thumbnail_kaeru2.png",
+      ]);
+      images.push([
+        warksPrefix + "thumbnail_2022newyearcard1.png",
+        warksPrefix + "thumbnail_kaeru2.png",
+      ]);
+      images.push([
+        warksPrefix + "thumbnail_2021christmascard1.png",
+        warksPrefix + "thumbnail_kaeru2.png",
+      ]);
+      images.push([
+        warksPrefix + "thumbnail_ugoqmainvisual1.png",
+        warksPrefix + "thumbnail_kaeru2.png",
+      ]);
       links.push({
         url: "work_kaeru",
         target: "main",
@@ -74,16 +103,25 @@ function setImages(mode, works = false) {
       break;
     case "menu_ABOUT":
       break;
+    case "menu_ART":
+      images.push(warksPrefix + "thumbnail_artsite1.png");
+      links.push({
+        url: "./gallery/index.html",
+        target: "_blank",
+      });
+      addClass = "link";
+      break;
     case "menu_INSTAGRAM":
       images.push(imagePrefix + "INSTAGRAM_icon.png");
       links.push({
         url: "https://www.instagram.com/mar__graphics/?igshid=Mzc1MmZhNjY%3D",
         target: "_blank",
       });
-      addClass = "instagram";
+      addClass = "link";
       menuBarColor = "rgb(244, 193, 250)";
       backgroundColor = "rgb(70, 0, 170)";
       stringColor = ["purple", "orange"];
+      menuButtonColer = "rgb(25, 30, 95)";
       break;
     // ギャラリー
     case "work_lineAndShape":
@@ -107,6 +145,7 @@ function setImages(mode, works = false) {
       addClass = "single";
       menuBarColor = "rgb(225, 255, 100)";
       stringColor = "green";
+      menuButtonColer = "rgb(0, 95, 50)";
       break;
     // 例外
     default:
@@ -195,21 +234,57 @@ function setImages(mode, works = false) {
   // メニューリストのカラー変更
   const menu = document.querySelector(".menuList");
   menu.style.backgroundColor = menuBarColor;
+
+  // スマホ用メニューボタンのカラー変更
+  document.documentElement.style.setProperty(
+    "--defaulr-string-colr",
+    menuButtonColer
+  );
 }
 
+/**
+ * ギャラリー画像の切り替え
+ */
 function imageAnimation() {
   const animationTargets = document.querySelectorAll(".images img");
-  animationTargets.forEach((target) => {
-    if (
-      target.getAttribute("data-image1") &&
-      target.getAttribute("data-image2")
-    ) {
-      if (imageChangeCount % 2 === 0) {
-        target.src = target.getAttribute("data-image2");
-      } else {
-        target.src = target.getAttribute("data-image1");
-      }
-    }
-  });
+  const item = animationTargets[imageChangeCount];
+  if (
+    item &&
+    item.getAttribute("data-image1") &&
+    item.getAttribute("data-image2")
+  ) {
+    item.src = item.getAttribute("data-image2");
+
+    setTimeout(() => {
+      item.src = item.getAttribute("data-image1");
+    }, imageChangeDuration);
+  }
+
   imageChangeCount++;
+  if (imageChangeCount >= animationTargets.length) {
+    imageChangeCount = 0;
+  }
+}
+
+/**
+ * ハンバーガーボタン
+ */
+function pushHamburgerButton(mode = 0) {
+  const button = document.querySelector(".hamburgerButton");
+  const menu = document.querySelector(".menuList");
+  switch (mode) {
+    case 1:
+      button.classList.add("open");
+      menu.classList.add("open");
+      break;
+
+    case 2:
+      button.classList.remove("open");
+      menu.classList.remove("open");
+      break;
+
+    default:
+      button.classList.toggle("open");
+      menu.classList.toggle("open");
+  }
 }

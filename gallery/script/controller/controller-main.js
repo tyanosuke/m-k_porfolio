@@ -109,9 +109,9 @@ function moveElement(element, pre = false) {
   if (pre) {
     // 大きさ
     const max = 1.0;
-    const min = 0.25;
+    const min = 0.1;
     const scale = Math.random() * (max - min) + min;
-    element.style.width = "calc(35vw * " + scale + ")";
+    element.style.width = "calc(max(45vw, 45vh) * " + scale + ")";
   } else {
     // トランジション
     const dist = Math.sqrt(

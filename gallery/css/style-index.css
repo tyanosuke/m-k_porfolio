@@ -45,3 +45,7 @@
   height: 150px;
   object-fit: contain;
 }
+
+.categoryButton.select img {
+  height: 35vh;
+}
