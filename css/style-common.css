@@ -160,6 +160,10 @@ button.hamburgerButton.open::after {
   align-items: center;
 }
 
+.mainArea > .images.single {
+  padding-top: 132px;
+}
+
 .mainArea > .images.list {
   padding-top: calc(12vh);
   padding-bottom: calc(12vh);
@@ -184,7 +188,7 @@ button.hamburgerButton.open::after {
 }
 
 .mainArea > .images.single img {
-  margin-bottom: 10vh;
+  margin-bottom: 6vh;
 }
 
 .mainArea > .images.link img {
@@ -211,7 +215,7 @@ button.hamburgerButton.open::after {
 }
 
 .mainArea > .images.list img.big {
-  margin-bottom: 150px;
+  margin-bottom: 100px;
 }
 
 .mainArea > .images.list img:not(:first-child).big {
@@ -249,13 +253,15 @@ button.hamburgerButton.open::after {
 /* -------------------------------------------------- */
 
 .caption {
-  width: 200px;
+  width: 375px;
   height: auto;
   object-fit: contain;
 
   position: fixed;
-  top: calc(35px + 15px);
+  top: calc(35px + 12px);
   left: 300px;
+
+  pointer-events: none;
 }
 
 .caption > img {
