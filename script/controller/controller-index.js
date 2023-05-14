@@ -59,50 +59,58 @@ function setImages(mode, works = false) {
 
   // 表示内容の判定
   const imagePrefix = "./image/art/";
+  const captionPrefix = "./image/caption/";
   const warksPrefix = "./image/warks/";
   let images = [];
-  let bigImageIndex = [];
   let links = [];
   let addClass;
+  let caption = "caption_WORKS.png";
   let menuBarColor = "rgb(255, 170, 0)";
   let backgroundColor = "rgb(185, 190, 185)";
   let stringColor = "yellow";
   let menuButtonColer = "rgb(255, 250, 50)";
   switch (mode) {
     // メニュー
+    // ● WORKS
     case "menu_WORKS":
       images.push([
         warksPrefix + "thumbnail_kaeru2.png",
         warksPrefix + "thumbnail_kaeru1.png",
       ]);
-      images.push([
-        warksPrefix + "thumbnail_color_shape1.png",
-        warksPrefix + "thumbnail_kaeru2.png",
-      ]);
-      images.push([
-        warksPrefix + "thumbnail_artsite1.png",
-        warksPrefix + "thumbnail_kaeru2.png",
-      ]);
-      images.push([
-        warksPrefix + "thumbnail_2022newyearcard1.png",
-        warksPrefix + "thumbnail_kaeru2.png",
-      ]);
-      images.push([
-        warksPrefix + "thumbnail_2021christmascard1.png",
-        warksPrefix + "thumbnail_kaeru2.png",
-      ]);
-      images.push([
-        warksPrefix + "thumbnail_ugoqmainvisual1.png",
-        warksPrefix + "thumbnail_kaeru2.png",
-      ]);
-      links.push({
-        url: "work_kaeru",
-        target: "main",
-      });
+      images.push([warksPrefix + "thumbnail_color_shape1.png"]);
+      images.push([warksPrefix + "thumbnail_artsite1.png"]);
+      images.push([warksPrefix + "thumbnail_2022newyearcard1.png"]);
+      images.push([warksPrefix + "thumbnail_2021christmascard1.png"]);
+      images.push([warksPrefix + "thumbnail_ugoqmainvisual1.png"]);
+      links.push(
+        {
+          url: "work_kaeru",
+          target: "main",
+        },
+        {
+          url: "work_colorAndShape",
+          target: "main",
+        },
+        {},
+        {
+          url: "work_newyearcard",
+          target: "main",
+        },
+        {
+          url: "work_christmascard",
+          target: "main",
+        },
+        {
+          url: "work_ugoq",
+          target: "main",
+        }
+      );
       addClass = "list";
       break;
+    // ● ABOUT
     case "menu_ABOUT":
       break;
+    // ● ART
     case "menu_ART":
       images.push(warksPrefix + "thumbnail_artsite1.png");
       links.push({
@@ -111,6 +119,7 @@ function setImages(mode, works = false) {
       });
       addClass = "link";
       break;
+    // ● INSTAGRAM
     case "menu_INSTAGRAM":
       images.push(imagePrefix + "INSTAGRAM_icon.png");
       links.push({
@@ -123,30 +132,60 @@ function setImages(mode, works = false) {
       stringColor = ["purple", "orange"];
       menuButtonColer = "rgb(25, 30, 95)";
       break;
+
     // ギャラリー
-    case "work_lineAndShape":
-      images.push(imagePrefix + "Work_color_shape_2.png");
-      images.push(imagePrefix + "Work_color_shape_3.png");
-      images.push(imagePrefix + "Work_color_shape_4.png");
-      images.push(imagePrefix + "Work_color_shape_5.png");
-      images.push(imagePrefix + "Work_color_shape_2.png");
-      images.push(imagePrefix + "Work_color_shape_3.png");
-      images.push(imagePrefix + "Work_color_shape_4.png");
-      images.push(imagePrefix + "Work_color_shape_5.png");
-      images.push(imagePrefix + "Work_color_shape_2.png");
-      images.push(imagePrefix + "Work_color_shape_3.png");
-      images.push(imagePrefix + "Work_color_shape_4.png");
-      images.push(imagePrefix + "Work_color_shape_5.png");
-      addClass = "list";
-      break;
+    // ● カエル
     case "work_kaeru":
-      images.push(imagePrefix + "Work_kaeru_1-32.png");
-      images.push(imagePrefix + "Work_kaeru_1-33.png");
+      images.push(imagePrefix + "kaeru/Work_kaeru_1.png");
+      images.push(imagePrefix + "kaeru/Work_kaeru_2.png");
+      images.push(imagePrefix + "kaeru/Work_kaeru_3.png");
+      images.push(imagePrefix + "kaeru/Work_kaeru_4.png");
+      images.push(imagePrefix + "kaeru/Work_kaeru_5.png");
       addClass = "single";
+      caption = "caption_kaeru.png";
       menuBarColor = "rgb(225, 255, 100)";
       stringColor = "green";
       menuButtonColer = "rgb(0, 95, 50)";
       break;
+    // ● 色と形
+    case "work_colorAndShape":
+      images.push(imagePrefix + "colorAndShape/" + "Work_color_shape_1.png");
+      images.push(imagePrefix + "colorAndShape/" + "Work_color_shape_2.png");
+      images.push(imagePrefix + "colorAndShape/" + "Work_color_shape_3.png");
+      addClass = "single";
+      menuBarColor = "rgb(0, 0, 198)";
+      stringColor = "colorAndShape";
+      break;
+    // ● newyearcard
+    case "work_newyearcard":
+      images.push(imagePrefix + "newyearcard/" + "Work_newyear2022_1.png");
+      images.push(imagePrefix + "newyearcard/" + "Work_newyear2022_2.png");
+      images.push(imagePrefix + "newyearcard/" + "Work_newyear2022_3.png");
+      images.push(imagePrefix + "newyearcard/" + "Work_newyear2022_4.png");
+      images.push(imagePrefix + "newyearcard/" + "Work_newyear2022_5.png");
+      images.push(imagePrefix + "newyearcard/" + "Work_newyear2022_6.png");
+      images.push(imagePrefix + "newyearcard/" + "Work_newyear2022_7.png");
+      addClass = "single";
+      menuBarColor = "rgb(0, 0, 0)";
+      stringColor = "newyearcard";
+      break;
+    // ● christmascard
+    case "work_christmascard":
+      images.push(imagePrefix + "christmascard/" + "Work_christmas_1.png");
+      images.push(imagePrefix + "christmascard/" + "Work_christmas_2.png");
+      addClass = "single";
+      menuBarColor = "rgb(210, 0, 20)";
+      stringColor = "christmascard";
+      break;
+    // ● ugoq
+    case "work_ugoq":
+      images.push(imagePrefix + "ugoq/" + "Work_ugoqmainvisual_1.png");
+      images.push(imagePrefix + "ugoq/" + "Work_ugoqmainvisual_2.png");
+      addClass = "single";
+      menuBarColor = "rgb(0, 0, 0)";
+      stringColor = ["ugoq_1", "ugoq_2"];
+      break;
+
     // 例外
     default:
       return;
@@ -182,14 +221,9 @@ function setImages(mode, works = false) {
       }
     }
 
-    // 大きい画像
-    if (bigImageIndex.includes(i)) {
-      exhibitItem.classList.add("big");
-    }
-
     // リンク設定
     const link = links[i];
-    if (link) {
+    if (link && link.url) {
       exhibitItem.classList.add("clickable");
       exhibitItem.addEventListener("click", () => {
         if (link.target === "main") {
@@ -205,6 +239,10 @@ function setImages(mode, works = false) {
 
     i++;
   });
+
+  // キャプション表示
+  const captionTarget = document.querySelector(".caption > img");
+  captionTarget.src = captionPrefix + caption;
 
   // 文字のカラー変更
   const colorChangeTargets = document.querySelectorAll(".colorChange img");
