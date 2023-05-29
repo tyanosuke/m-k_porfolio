@@ -127,6 +127,7 @@ function setImages(mode, works = false) {
       break;
     // ● ABOUT
     case "menu_ABOUT":
+      works = false;
       break;
     // ● ART
     case "menu_ART":
@@ -136,6 +137,7 @@ function setImages(mode, works = false) {
         target: "_blank",
       });
       addClass = "link";
+      works = false;
       break;
     // ● INSTAGRAM
     case "menu_INSTAGRAM":
@@ -149,6 +151,7 @@ function setImages(mode, works = false) {
       backgroundColor = "rgb(70, 0, 170)";
       stringColor = ["purple", "orange"];
       menuButtonColer = "rgb(25, 30, 95)";
+      works = false;
       break;
 
     // ギャラリー
