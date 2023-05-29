@@ -94,7 +94,10 @@ function setImages(mode, works = false) {
           url: "work_colorAndShape",
           target: "main",
         },
-        {},
+        {
+          url: "menu_ART",
+          target: "main",
+        },
         {
           url: "work_newyearcard",
           target: "main",
