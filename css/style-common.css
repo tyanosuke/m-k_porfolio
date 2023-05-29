@@ -41,6 +41,8 @@ body {
   z-index: 1000;
 
   padding-top: 35px;
+
+  transition: all 0.25s;
 }
 
 .menuList .item {
@@ -68,8 +70,6 @@ body {
     height: var(--sp-menu-height);
 
     padding-top: 0;
-
-    transition: all 0.25s;
   }
 
   .menuList:not(.open) > * {
