@@ -183,7 +183,7 @@ button.hamburgerButton.open::after {
 
 .mainArea > .images img {
   width: auto;
-  max-width: 80%;
+  max-width: 70%;
   object-fit: contain;
 }
 

@@ -82,6 +82,9 @@ function setImages(mode, works = false) {
       images.push([warksPrefix + "thumbnail_2022newyearcard1.png"]);
       images.push([warksPrefix + "thumbnail_2021christmascard1.png"]);
       images.push([warksPrefix + "thumbnail_ugoqmainvisual1.png"]);
+      images.push([warksPrefix + "thumbnail_500.png"]);
+      images.push([warksPrefix + "thumbnail_flower.png"]);
+      images.push([warksPrefix + "thumbnail_usagi.png"]);
       links.push(
         {
           url: "work_kaeru",
@@ -103,6 +106,18 @@ function setImages(mode, works = false) {
         {
           url: "work_ugoq",
           target: "main",
+        },
+        {
+          url: "work_500",
+          target: "main",
+        },
+        {
+          url: "work_flower",
+          target: "main",
+        },
+        {
+          url: "work_usagi",
+          target: "main",
         }
       );
       addClass = "list";
@@ -121,7 +136,7 @@ function setImages(mode, works = false) {
       break;
     // ● INSTAGRAM
     case "menu_INSTAGRAM":
-      images.push(imagePrefix + "INSTAGRAM_icon.png");
+      images.push(imagePrefix + "other/INSTAGRAM_icon.png");
       links.push({
         url: "https://www.instagram.com/mar__graphics/?igshid=Mzc1MmZhNjY%3D",
         target: "_blank",
@@ -144,8 +159,8 @@ function setImages(mode, works = false) {
       addClass = "single";
       caption = "caption_kaeru.png";
       menuBarColor = "rgb(225, 255, 100)";
-      stringColor = "green";
       menuButtonColer = "rgb(0, 95, 50)";
+      stringColor = "green";
       break;
     // ● 色と形
     case "work_colorAndShape":
@@ -154,6 +169,7 @@ function setImages(mode, works = false) {
       images.push(imagePrefix + "colorAndShape/" + "Work_color_shape_3.png");
       addClass = "single";
       menuBarColor = "rgb(0, 0, 198)";
+      menuButtonColer = "rgb(255, 210, 0)";
       stringColor = "colorAndShape";
       break;
     // ● newyearcard
@@ -167,6 +183,7 @@ function setImages(mode, works = false) {
       images.push(imagePrefix + "newyearcard/" + "Work_newyear2022_7.png");
       addClass = "single";
       menuBarColor = "rgb(0, 0, 0)";
+      menuButtonColer = "rgb(100, 255, 100)";
       stringColor = "newyearcard";
       break;
     // ● christmascard
@@ -175,6 +192,7 @@ function setImages(mode, works = false) {
       images.push(imagePrefix + "christmascard/" + "Work_christmas_2.png");
       addClass = "single";
       menuBarColor = "rgb(210, 0, 20)";
+      menuButtonColer = "rgb(255, 255, 185)";
       stringColor = "christmascard";
       break;
     // ● ugoq
@@ -183,7 +201,39 @@ function setImages(mode, works = false) {
       images.push(imagePrefix + "ugoq/" + "Work_ugoqmainvisual_2.png");
       addClass = "single";
       menuBarColor = "rgb(0, 0, 0)";
+      menuButtonColer = "rgb(255, 255, 255)";
       stringColor = ["ugoq_1", "ugoq_2"];
+      break;
+    // ● 500folowers
+    case "work_500":
+      images.push(imagePrefix + "500folowers/" + "Work_500_1.png");
+      images.push(imagePrefix + "500folowers/" + "Work_500_2.png");
+      images.push(imagePrefix + "500folowers/" + "Work_500_3.png");
+      images.push(imagePrefix + "500folowers/" + "Work_500_4.png");
+      addClass = "single";
+      menuBarColor = "rgb(60, 0, 156)";
+      menuButtonColer = "rgb(255, 255, 255)";
+      stringColor = "500folowers";
+      break;
+    // ● flower
+    case "work_flower":
+      images.push(imagePrefix + "flower/" + "Work_flower_1.png");
+      images.push(imagePrefix + "flower/" + "Work_flower_2.png");
+      images.push(imagePrefix + "flower/" + "Work_flower_3.png");
+      images.push(imagePrefix + "flower/" + "Work_flower_4.png");
+      addClass = "single";
+      menuBarColor = "rgb(245, 90, 30)";
+      menuButtonColer = "rgb(255, 255, 0)";
+      stringColor = "flower";
+      break;
+    // ● usagi
+    case "work_usagi":
+      images.push(imagePrefix + "usagi/" + "Work_usagi_1.png");
+      images.push(imagePrefix + "usagi/" + "Work_usagi_2.png");
+      addClass = "single";
+      menuBarColor = "rgb(0, 75, 60)";
+      menuButtonColer = "rgb(255, 245, 195)";
+      stringColor = "usagi";
       break;
 
     // 例外
