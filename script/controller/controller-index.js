@@ -85,6 +85,11 @@ function setImages(mode, works = false) {
       images.push([warksPrefix + "thumbnail_500.png"]);
       images.push([warksPrefix + "thumbnail_flower.png"]);
       images.push([warksPrefix + "thumbnail_usagi.png"]);
+      images.push([warksPrefix + "thumbnail_UGOQBC.png"]);
+      images.push([warksPrefix + "thumbnail_UJHP.png"]);
+      images.push([warksPrefix + "thumbnail_nomad.png"]);
+      images.push([warksPrefix + "thumbnail_UGOQARAI.png"]);
+      images.push([warksPrefix + "thumbnail_breaktime.png"]);
       links.push(
         {
           url: "work_kaeru",
@@ -120,6 +125,26 @@ function setImages(mode, works = false) {
         },
         {
           url: "work_usagi",
+          target: "main",
+        },
+        {
+          url: "work_ugoqbc",
+          target: "main",
+        },
+        {
+          url: "work_ujhp",
+          target: "main",
+        },
+        {
+          url: "work_nomad",
+          target: "main",
+        },
+        {
+          url: "work_ugoqarai",
+          target: "main",
+        },
+        {
+          url: "work_breaktime",
           target: "main",
         }
       );
@@ -240,6 +265,69 @@ function setImages(mode, works = false) {
       menuBarColor = "rgb(0, 75, 60)";
       menuButtonColer = "rgb(255, 245, 195)";
       stringColor = "usagi";
+      break;
+
+    // ● ugoqbc
+    case "work_ugoqbc":
+      images.push(imagePrefix + "ugoqbc/" + "Work_UGOQBC_1.png");
+      images.push(imagePrefix + "ugoqbc/" + "Work_UGOQBC_2.png");
+      addClass = "single";
+      menuBarColor = "rgb(0, 0, 0)";
+      menuButtonColer = "rgb(255, 255, 255)";
+      stringColor = ["ugoqbc_1", "ugoqbc_2"];
+      break;
+    // ● UJHP
+    case "work_ujhp":
+      images.push(imagePrefix + "ujhp/" + "Work_UJHP_1.png");
+      images.push(imagePrefix + "ujhp/" + "Work_UJHP_2.png");
+      images.push(imagePrefix + "ujhp/" + "Work_UJHP_3.png");
+      images.push(imagePrefix + "ujhp/" + "Work_UJHP_4.png");
+      images.push(imagePrefix + "ujhp/" + "Work_UJHP_5.png");
+      images.push(imagePrefix + "ujhp/" + "Work_UJHP_6.png");
+      images.push(imagePrefix + "ujhp/" + "Work_UJHP_7.png");
+      images.push(imagePrefix + "ujhp/" + "Work_UJHP_8.png");
+      images.push(imagePrefix + "ujhp/" + "Work_UJHP_9.png");
+      addClass = "single";
+      menuBarColor = "rgb(244, 246, 246)";
+      menuButtonColer = "rgb(0, 0, 0)";
+      stringColor = ["ujhp_1", "ujhp_2"];
+      break;
+    // ● nomad
+    case "work_nomad":
+      images.push(imagePrefix + "nomad/" + "Work_nomad_1.png");
+      images.push(imagePrefix + "nomad/" + "Work_nomad_2.png");
+      images.push(imagePrefix + "nomad/" + "Work_nomad_3.png");
+      addClass = "single";
+      menuBarColor = "rgb(0, 0, 0)";
+      menuButtonColer = "rgb(255, 110, 0)";
+      stringColor = ["nomad_1", "nomad_2"];
+      break;
+    // ● ugoqarai
+    case "work_ugoqarai":
+      images.push(imagePrefix + "ugoqarai/" + "Work_UGOQARAI_1.png");
+      images.push(imagePrefix + "ugoqarai/" + "Work_UGOQARAI_2.png");
+      images.push(imagePrefix + "ugoqarai/" + "Work_UGOQARAI_3.png");
+      images.push(imagePrefix + "ugoqarai/" + "Work_UGOQARAI_4.png");
+      images.push(imagePrefix + "ugoqarai/" + "Work_UGOQARAI_5.png");
+      images.push(imagePrefix + "ugoqarai/" + "Work_UGOQARAI_6.png");
+      images.push(imagePrefix + "ugoqarai/" + "Work_UGOQARAI_7.png");
+      images.push(imagePrefix + "ugoqarai/" + "Work_UGOQARAI_8.png");
+      addClass = "single";
+      menuBarColor = "rgb(0, 0, 0)";
+      menuButtonColer = "rgb(225, 195, 115)";
+      stringColor = "ugoqarai";
+      break;
+    // ● breaktime
+    case "work_breaktime":
+      images.push(imagePrefix + "breaktime/" + "Work_breaktime_1.png");
+      images.push(imagePrefix + "breaktime/" + "Work_breaktime_2.png");
+      images.push(imagePrefix + "breaktime/" + "Work_breaktime_3.png");
+      images.push(imagePrefix + "breaktime/" + "Work_breaktime_4.png");
+      images.push(imagePrefix + "breaktime/" + "Work_breaktime_5.png");
+      addClass = "single";
+      menuBarColor = "rgb(0, 70, 60)";
+      menuButtonColer = "rgb(255, 245, 195)";
+      stringColor = ["breaktime_1", "breaktime_2"];
       break;
 
     // 例外
